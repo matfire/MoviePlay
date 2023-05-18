@@ -6,7 +6,12 @@ import { toast } from "react-hot-toast";
 
 export default function Home() {
   const user = useAtomValue(userAtom);
-  let data = useLoaderData();
+  let data = useLoaderData() as {
+    playlists: {
+      playlist: { $id: string; name: string; author: string };
+      movies: [];
+    }[];
+  };
 
   const handlePlaylistDelete = async (id: string) => {
     try {
@@ -16,12 +21,13 @@ export default function Home() {
       );
       await Promise.all(
         data.playlists
-          .find((e) => e.playlist.$id === id)
-          .movies.map((movie) =>
-            deleteDocument(
-              import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
-              movie.$id
-            )
+          .find((e) => e.playlist.$id === id)!
+          .movies.map(
+            (movie: { tmdb_id: string; playlist_id: string; $id: string }) =>
+              deleteDocument(
+                import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
+                movie.$id
+              )
           )
       );
     } catch (error) {

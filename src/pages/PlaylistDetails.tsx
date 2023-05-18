@@ -1,7 +1,11 @@
+import { Movie } from "@matfire/the_movie_wrapper/dist/types/movie";
 import { useLoaderData } from "react-router-dom";
 
 export default function PlaylistDetails() {
-  const data = useLoaderData();
+  const data = useLoaderData() as {
+    playlist: { name: string };
+    movies: Movie[];
+  };
 
   return (
     <div>
@@ -10,7 +14,7 @@ export default function PlaylistDetails() {
         <p>{data.movies.length} movies</p>
       </div>
       <div className="flex flex-col mt-4 space-y-4">
-        {data.movies.map((movie) => (
+        {data.movies.map((movie: Movie) => (
           <div key={movie.id} className="flex flex-col md:flex-row gap-2">
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

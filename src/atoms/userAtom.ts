@@ -1,4 +1,5 @@
 import { atom } from "jotai";
-const userAtom = atom(null);
+import type { Models } from "appwrite";
+const userAtom = atom<Models.Preferences | null>(null);
 
 export default userAtom;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Movie } from "@matfire/the_movie_wrapper/dist/types/movie";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import client from "../utils/tmdb";
 
 export default function MovieSearch({
@@ -14,7 +14,7 @@ export default function MovieSearch({
   const { register, handleSubmit } = useForm();
   const [animationParent] = useAutoAnimate();
 
-  const searchMovies = async (data) => {
+  const searchMovies: SubmitHandler<FieldValues> = async (data) => {
     setLoading(true);
     const res = await client.movies.search({ query: data.search });
     setResults(res.results);
@@ -28,7 +28,6 @@ export default function MovieSearch({
         </label>
         <input
           type="search"
-          name="movies"
           id="movies"
           className="input flex-1"
           placeholder="Search for a movie"

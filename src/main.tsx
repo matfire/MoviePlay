@@ -25,7 +25,8 @@ const router = createBrowserRouter([
         element: <Home />,
         loader: async () => {
           const playlists = await getDocuments(
-            import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID
+            import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
+            []
           );
           const data = await Promise.all(
             playlists.documents.map(async (playlist) => {
@@ -55,8 +56,9 @@ const router = createBrowserRouter([
       {
         path: "/playlist/:id",
         element: <PlaylistDetails />,
-        loader: async ({ params, request }) => {
+        loader: async ({ params }) => {
           const { id } = params;
+          if (!id) return redirect("/?error=Invalid Id");
           try {
             const playlist = await getDocument(
               import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,

@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import userAtom from "../atoms/userAtom";
 import MovieSearch from "../components/MovieSearch";
 import { Movie } from "@matfire/the_movie_wrapper/dist/types/movie";
@@ -14,14 +14,14 @@ export default function NewPlaylist() {
   const [animationParent] = useAutoAnimate();
   const navigate = useNavigate();
   const user = useAtomValue(userAtom);
-  const createPLaylist = async (data) => {
+  const createPlaylist: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
     const permissions = [
-      Permission.delete(Role.user(user.$id)),
-      Permission.update(Role.user(user.$id)),
+      Permission.delete(Role.user(user!.$id)),
+      Permission.update(Role.user(user!.$id)),
     ];
     if (data.private) {
-      permissions.push(Permission.read(Role.user(user.$id)));
+      permissions.push(Permission.read(Role.user(user!.$id)));
     } else {
       permissions.push(Permission.read(Role.any()));
     }
@@ -30,7 +30,7 @@ export default function NewPlaylist() {
       {
         name: data.name,
         private: data.private,
-        author: user.$id,
+        author: user?.$id,
       },
       permissions
     );
@@ -60,7 +60,7 @@ export default function NewPlaylist() {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit(createPLaylist)}>
+      <form onSubmit={handleSubmit(createPlaylist)}>
         <div className="form-control">
           <label htmlFor="name" className="label">
             <span className="label-text">Name</span>
@@ -68,7 +68,6 @@ export default function NewPlaylist() {
           <input
             placeholder="playlist title here"
             type="text"
-            name="name"
             className="input"
             {...register("name", { required: true })}
           />
@@ -78,7 +77,6 @@ export default function NewPlaylist() {
             <span className="label-text">Keep Playlist Private</span>
             <input
               type="checkbox"
-              name="private"
               className="checkbox"
               {...register("private")}
             />
