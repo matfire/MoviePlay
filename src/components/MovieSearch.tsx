@@ -53,7 +53,9 @@ export default function MovieSearch({
             }}
           >
             <div className="absolute inset-0 bg-base-100/80 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity">
-              <h2 className="font-bold">{movie.title}</h2>
+              <h2 className="font-bold">
+                {movie.title} ({new Date(movie.release_date).getFullYear()})
+              </h2>
               <p>{movie.overview?.slice(undefined, 150)}...</p>
               <button
                 type="submit"

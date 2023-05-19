@@ -13,6 +13,7 @@ export default function Home() {
 
   const handlePlaylistDelete = async (id: string) => {
     try {
+      toast.loading("Deleting playlist...", { id: "delete" });
       await deleteDocument(
         import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
         id
@@ -32,8 +33,9 @@ export default function Home() {
           playlists: old.playlists.filter((e) => e.playlist.$id !== id),
         };
       });
+      toast.success("Playlist deleted", { id: "delete" });
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong", { id: "delete" });
       console.error(error);
     }
   };

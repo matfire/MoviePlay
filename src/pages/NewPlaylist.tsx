@@ -8,6 +8,7 @@ import { createDocument } from "../utils/appwrite";
 import { Permission, Role } from "appwrite";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 export default function NewPlaylist() {
   const { register, handleSubmit } = useForm();
@@ -15,7 +16,7 @@ export default function NewPlaylist() {
   const navigate = useNavigate();
   const user = useAtomValue(userAtom);
   const createPlaylist: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
+    toast.loading("Creating playlist...", { id: "create-playlist" });
     const permissions = [
       Permission.delete(Role.user(user!.$id)),
       Permission.update(Role.user(user!.$id)),
@@ -25,30 +26,35 @@ export default function NewPlaylist() {
     } else {
       permissions.push(Permission.read(Role.any()));
     }
-    const playlist = await createDocument(
-      import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
-      {
-        name: data.name,
-        private: data.private,
-        author: user?.$id,
-      },
-      permissions
-    );
-    console.log(playlist);
-    await Promise.all(
-      movieOrder.map(async (movie) => {
-        return await createDocument(
-          import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
-          {
-            playlist_id: playlist.$id,
-            tmdb_id: movie.id,
-            order: movie.order,
-          },
-          permissions
-        );
-      })
-    );
-    navigate(`/playlist/${playlist.$id}`);
+    try {
+      const playlist = await createDocument(
+        import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
+        {
+          name: data.name,
+          private: data.private,
+          author: user?.$id,
+        },
+        permissions
+      );
+      await Promise.all(
+        movieOrder.map(async (movie) => {
+          return await createDocument(
+            import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
+            {
+              playlist_id: playlist.$id,
+              tmdb_id: movie.id,
+              order: movie.order,
+            },
+            permissions
+          );
+        })
+      );
+      toast.success("Playlist created", { id: "create-playlist" });
+      navigate(`/playlist/${playlist.$id}`);
+    } catch (error) {
+      toast.error("Something went wrong", { id: "create-playlist" });
+      console.error(error);
+    }
   };
   const [movies, setMovies] = useState<Movie[]>([]);
   const [movieOrder, setMovieOrder] = useState<{ id: number; order: number }[]>(
@@ -88,14 +94,16 @@ export default function NewPlaylist() {
       </form>
       <div className="border border-black" ref={animationParent}>
         {movies.map((movie, idx) => (
-          <div className="flex" key={`selected_movie_${movie.id}`}>
+          <div className="flex gap-4" key={`selected_movie_${movie.id}`}>
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
               className="w-1/4"
             />
             <div className="flex flex-col justify-between w-full">
-              <h2 className="font-bold">{movie.title}</h2>
+              <h2 className="font-bold">
+                {movie.title} ({new Date(movie.release_date).getFullYear()})
+              </h2>
               <p>{movie.overview}</p>
               <button
                 className="btn btn-error"
