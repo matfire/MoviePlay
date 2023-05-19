@@ -3,15 +3,13 @@ import { Link, useLoaderData } from "react-router-dom";
 import userAtom from "../atoms/userAtom";
 import { deleteDocument } from "../utils/appwrite";
 import { toast } from "react-hot-toast";
+import { useState } from "react";
+import { ILoaderPlaylist } from "../utils/types";
 
 export default function Home() {
   const user = useAtomValue(userAtom);
-  let data = useLoaderData() as {
-    playlists: {
-      playlist: { $id: string; name: string; author: string };
-      movies: [];
-    }[];
-  };
+  let data = useLoaderData() as ILoaderPlaylist;
+  const [playlists, setPlaylists] = useState<ILoaderPlaylist>(data);
 
   const handlePlaylistDelete = async (id: string) => {
     try {
@@ -22,14 +20,18 @@ export default function Home() {
       await Promise.all(
         data.playlists
           .find((e) => e.playlist.$id === id)!
-          .movies.map(
-            (movie: { tmdb_id: string; playlist_id: string; $id: string }) =>
-              deleteDocument(
-                import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
-                movie.$id
-              )
+          .movies.map((movie) =>
+            deleteDocument(
+              import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
+              movie.$id
+            )
           )
       );
+      setPlaylists((old) => {
+        return {
+          playlists: old.playlists.filter((e) => e.playlist.$id !== id),
+        };
+      });
     } catch (error) {
       toast.error("Something went wrong");
       console.error(error);
@@ -38,7 +40,7 @@ export default function Home() {
 
   return (
     <div className="flex justify-evenly flex-wrap">
-      {data.playlists.map((playlist) => (
+      {playlists.playlists.map((playlist) => (
         <div
           key={playlist.playlist.$id}
           className="card w-96 bg-base-100 shadow-xl"

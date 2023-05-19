@@ -9,9 +9,9 @@ export default function AuthCallback() {
     navigate("/");
   }, []);
   return (
-    <div>
-      <h1>AuthCallback</h1>
-      <p>AuthCallback page content</p>
+    <div className="w-full h-full flex flex-col justify-center items-center">
+      <h1 className="font-bold text-2xl">Welcome!</h1>
+      <p>we're finishing signing you in, please wait...</p>
     </div>
   );
 }
