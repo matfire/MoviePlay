@@ -1,4 +1,5 @@
 import { account } from "../utils/appwrite";
+import { Icon } from "@iconify/react";
 
 export default function Login() {
   return (
@@ -12,7 +13,9 @@ export default function Login() {
             `${import.meta.env.VITE_APP_URL}/auth/callback`
           )
         }
+        className="btn btn-primary gap-2"
       >
+        <Icon icon="devicon:google" className="text-lg" />
         Google
       </button>
     </div>

@@ -14,6 +14,8 @@ import PlaylistDetails from "./pages/PlaylistDetails.tsx";
 import { getDocument, getDocuments } from "./utils/appwrite.ts";
 import { Query } from "appwrite";
 import client from "./utils/tmdb.ts";
+import Logout from "./pages/Logout.tsx";
+import AuthCallback from "./pages/AuthCallback.tsx";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/logout",
+        element: <Logout />,
+      },
+      {
+        path: "/auth/callback",
+        element: <AuthCallback />,
       },
       {
         path: "/playlist/new",

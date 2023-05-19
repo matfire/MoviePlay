@@ -44,6 +44,7 @@ const deleteDocument = (collectionId: string, documentId: string) => {
 };
 
 export {
+  client,
   account,
   databases,
   avatars,

@@ -2,7 +2,7 @@ import { Outlet, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useSetAtom } from "jotai";
 import userAtom from "./atoms/userAtom";
-import { account } from "./utils/appwrite";
+import { account, client } from "./utils/appwrite";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
