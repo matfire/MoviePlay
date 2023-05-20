@@ -11,7 +11,11 @@ import Login from "./pages/Login.tsx";
 import Home from "./pages/Home.tsx";
 import NewPlaylist from "./pages/NewPlaylist.tsx";
 import PlaylistDetails from "./pages/PlaylistDetails.tsx";
-import { getDocument, getDocuments } from "./utils/appwrite.ts";
+import {
+  getDocument,
+  getDocuments,
+  updateStatistic,
+} from "./utils/appwrite.ts";
 import { Query } from "appwrite";
 import client from "./utils/tmdb.ts";
 import Logout from "./pages/Logout.tsx";
@@ -87,6 +91,7 @@ const router = createBrowserRouter([
                 return res;
               })
             );
+            await updateStatistic(id);
             return {
               playlist,
               movies,

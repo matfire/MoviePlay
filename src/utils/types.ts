@@ -1,18 +1,19 @@
-interface IPlaylistDocument {
-  $id: string;
+import type { Models } from "appwrite";
+
+export type PlaylistDocument = {
   name: string;
   author: string;
-}
+  private: boolean;
+} & Models.Document;
 
-export interface IMovieDocument {
-  $id: string;
+export type MovieDocument = {
   tmdb_id: string;
   playlist_id: string;
-}
+} & Models.Document;
 
-export interface ILoaderPlaylist {
+export type LoaderPlaylist = {
   playlists: {
-    playlist: IPlaylistDocument;
-    movies: IMovieDocument[];
+    playlist: PlaylistDocument;
+    movies: MovieDocument[];
   }[];
-}
+};

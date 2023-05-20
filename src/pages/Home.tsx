@@ -4,12 +4,12 @@ import { toast } from "react-hot-toast";
 import { useState } from "react";
 import userAtom from "../atoms/userAtom";
 import { deleteDocument } from "../utils/appwrite";
-import { ILoaderPlaylist } from "../utils/types";
+import { LoaderPlaylist } from "../utils/types";
 
 export default function Home() {
   const user = useAtomValue(userAtom);
-  let data = useLoaderData() as ILoaderPlaylist;
-  const [playlists, setPlaylists] = useState<ILoaderPlaylist>(data);
+  let data = useLoaderData() as LoaderPlaylist;
+  const [playlists, setPlaylists] = useState<LoaderPlaylist>(data);
 
   const handlePlaylistDelete = async (id: string) => {
     try {
