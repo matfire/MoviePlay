@@ -2,7 +2,7 @@ import { account } from "../utils/appwrite";
 import { Icon } from "@iconify/react";
 
 export default function Login() {
-  const login = (provider) => {
+  const login = (provider: string) => {
     account.createOAuth2Session(
       provider,
       `${import.meta.env.VITE_APP_URL}/auth/callback`

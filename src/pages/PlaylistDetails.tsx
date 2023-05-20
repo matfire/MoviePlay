@@ -27,6 +27,7 @@ export default function PlaylistDetails() {
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               className="w-full md:w-1/4"
+              alt={movie.title}
             />
             <div className="flex flex-col w-full">
               <h3 className="font-semibold text-xl">{movie.title}</h3>
