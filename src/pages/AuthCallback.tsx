@@ -1,12 +1,27 @@
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { account } from "../utils/appwrite";
+import { useAtom } from "jotai";
+import userAtom from "../atoms/userAtom";
 
 export default function AuthCallback() {
   const navigate = useNavigate();
+  const [user, setUser] = useAtom(userAtom);
   useEffect(() => {
-    toast.success("Welcome back!");
-    navigate("/");
+    const login = async () => {
+      try {
+        const u = await account.get();
+        setUser(u);
+        toast.success(`Welcome back, ${u.name}!}`);
+        navigate("/");
+      } catch (error) {
+        toast.error("Something went wrong");
+        console.error(error);
+        navigate("/login");
+      }
+    };
+    login();
   }, []);
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
