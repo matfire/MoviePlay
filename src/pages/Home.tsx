@@ -1,9 +1,9 @@
 import { useAtomValue } from "jotai";
 import { Link, useLoaderData } from "react-router-dom";
-import userAtom from "../atoms/userAtom";
-import { deleteDocument } from "../utils/appwrite";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
+import userAtom from "../atoms/userAtom";
+import { deleteDocument } from "../utils/appwrite";
 import { ILoaderPlaylist } from "../utils/types";
 
 export default function Home() {

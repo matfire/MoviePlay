@@ -1,5 +1,6 @@
-import { Movie } from "@matfire/the_movie_wrapper/dist/types/movie";
 import { useLoaderData } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { Movie } from "@matfire/the_movie_wrapper/dist/types/movie";
 
 export default function PlaylistDetails() {
   const data = useLoaderData() as {
@@ -9,6 +10,13 @@ export default function PlaylistDetails() {
 
   return (
     <div>
+      <Helmet>
+        <title>{data.playlist.name} | Movie List</title>
+        <meta property="og:title" content={data.playlist.name} />
+        <meta property="og:description" content="Movie List" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+      </Helmet>
       <div className="flex justify-between items-center">
         <h2 className="font-bold text-2xl">{data.playlist.name}</h2>
         <p>{data.movies.length} movies</p>
