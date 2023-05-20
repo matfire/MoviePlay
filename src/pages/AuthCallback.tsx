@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { account } from "../utils/appwrite";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import userAtom from "../atoms/userAtom";
 
 export default function AuthCallback() {
   const navigate = useNavigate();
-  const [user, setUser] = useAtom(userAtom);
+  const setUser = useSetAtom(userAtom);
   useEffect(() => {
     const login = async () => {
       try {
