@@ -7,6 +7,7 @@ import {
   Query,
   Role,
   Permission,
+  Functions,
 } from "appwrite";
 import { PlaylistDocument } from "./types";
 const client = new Client();
@@ -18,6 +19,7 @@ client
 const account = new Account(client);
 const databases = new Databases(client);
 const avatars = new Avatars(client);
+const functions = new Functions(client);
 
 const getDocuments = (collectionId: string, queries: string[]) => {
   return databases.listDocuments(
@@ -67,33 +69,13 @@ const deleteDocument = (collectionId: string, documentId: string) => {
 };
 
 const updateStatistic = async (documentId: string) => {
-  const user = await account.get();
-  const playlist = (await getDocument(
-    import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
-    documentId
-  )) as PlaylistDocument;
-  const doc = await getDocuments(import.meta.env.VITE_APPWRITE_STATISTICS_ID, [
-    Query.equal("playlist_id", documentId),
-    Query.limit(1),
-  ]);
-  if (doc.documents.length > 0) {
-    await updateDocument(
-      import.meta.env.VITE_APPWRITE_STATISTICS_ID,
-      doc.documents[0].$id,
-      { views: doc.documents[0].views + 1 }
+  try {
+    functions.createExecution(
+      import.meta.env.VITE_APPWRITE_STATISTICS_FUNCTION_ID,
+      JSON.stringify({ id: documentId })
     );
-  } else {
-    const permissions = [Permission.update(Role.any())];
-    if (playlist.private) {
-      permissions.push(Permission.read(Role.user(user.$id)));
-    } else {
-      permissions.push(Permission.read(Role.any()));
-    }
-    await createDocument(
-      import.meta.env.VITE_APPWRITE_STATISTICS_ID,
-      { playlist_id: documentId, views: 1 },
-      permissions
-    );
+  } catch (error) {
+    console.log(error);
   }
 };
 
