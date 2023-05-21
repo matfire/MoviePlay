@@ -1,15 +1,4 @@
-import {
-  Client,
-  Account,
-  Databases,
-  Avatars,
-  ID,
-  Query,
-  Role,
-  Permission,
-  Functions,
-} from "appwrite";
-import { PlaylistDocument } from "./types";
+import { Client, Account, Databases, Avatars, ID, Functions } from "appwrite";
 const client = new Client();
 
 client
