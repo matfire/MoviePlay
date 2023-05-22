@@ -20,6 +20,7 @@ import { Query } from "appwrite";
 import client from "./utils/tmdb.ts";
 import Logout from "./pages/Logout.tsx";
 import AuthCallback from "./pages/AuthCallback.tsx";
+import { PlaylistDocument } from "./utils/types.ts";
 
 const router = createBrowserRouter([
   {
@@ -32,10 +33,10 @@ const router = createBrowserRouter([
         loader: async () => {
           const playlists = await getDocuments(
             import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
-            []
+            [Query.orderDesc("views")]
           );
           const data = await Promise.all(
-            playlists.documents.map(async (playlist) => {
+            playlists.documents.map(async (playlist: PlaylistDocument) => {
               const moviesDocuments = await getDocuments(
                 import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
                 [Query.equal("playlist_id", playlist.$id)]
