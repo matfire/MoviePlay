@@ -12,6 +12,7 @@ import Home from "./pages/Home.tsx";
 import NewPlaylist from "./pages/NewPlaylist.tsx";
 import PlaylistDetails from "./pages/PlaylistDetails.tsx";
 import {
+  account,
   getDocument,
   getDocuments,
   updateStatistic,
@@ -66,6 +67,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/playlist/new",
+        loader: async () => {
+          try {
+            await account.get();
+            return {
+            }
+          } catch (error) {
+            return redirect("/?error=You need to be logged in to create a playlist");
+          }
+        },
         element: <NewPlaylist />,
       },
       {
