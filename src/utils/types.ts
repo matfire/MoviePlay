@@ -4,6 +4,8 @@ export type PlaylistDocument = {
   name: string;
   author: string;
   private: boolean;
+  views: number;
+  description?: string;
 } & Models.Document;
 
 export type MovieDocument = {
