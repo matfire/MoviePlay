@@ -1,4 +1,5 @@
 import { Client, Account, Databases, Avatars, ID, Functions } from "appwrite";
+import type { Models } from "appwrite";
 const client = new Client();
 
 client
@@ -10,21 +11,27 @@ const databases = new Databases(client);
 const avatars = new Avatars(client);
 const functions = new Functions(client);
 
-const getDocuments = (collectionId: string, queries: string[]) => {
-  return databases.listDocuments(
+async function getDocuments<T extends Models.Document>(
+  collectionId: string,
+  queries: string[]
+): Promise<Models.DocumentList<T>> {
+  return databases.listDocuments<T>(
     import.meta.env.VITE_APPWRITE_DB_ID,
     collectionId,
     queries
   );
-};
+}
 
-const getDocument = (collectionId: string, documentId: string) => {
+async function getDocument<T extends Models.Document>(
+  collectionId: string,
+  documentId: string
+): Promise<T> {
   return databases.getDocument(
     import.meta.env.VITE_APPWRITE_DB_ID,
     collectionId,
     documentId
   );
-};
+}
 
 const createDocument = (collectionId: string, data: any, roles: any) => {
   return databases.createDocument(
