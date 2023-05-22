@@ -4,10 +4,12 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import client from "../utils/tmdb";
 
+type SelectMovieFunction = (movie: Movie) => void;
+
 export default function MovieSearch({
   selectMovie,
 }: {
-  selectMovie: Function;
+  selectMovie: SelectMovieFunction;
 }) {
   const [results, setResults] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
