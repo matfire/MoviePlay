@@ -32,6 +32,7 @@ export default function NewPlaylist() {
         {
           name: data.name,
           private: data.private,
+          description: data.description || null,
           author: user?.$id,
         },
         permissions
@@ -74,19 +75,30 @@ export default function NewPlaylist() {
           <input
             placeholder="playlist title here"
             type="text"
-            className="input"
+            className="input input-bordered"
             {...register("name", { required: true })}
           />
         </div>
         <div className="form-control">
-          <label htmlFor="private" className="label cursor-pointer">
+          <label htmlFor="private" className="label">
             <span className="label-text">Keep Playlist Private</span>
             <input
               type="checkbox"
-              className="checkbox"
+              className="checkbox checkbox-primary"
               {...register("private")}
             />
           </label>
+        </div>
+        <div className="form-control">
+          <label htmlFor="description" className="label">
+            <span className="label-text">Description</span>
+          </label>
+          <textarea
+            cols={30}
+            rows={10}
+            className="textarea textarea-bordered"
+            {...register("description")}
+          ></textarea>
         </div>
         <button className="btn btn-primary" type="submit">
           Create

@@ -1,10 +1,11 @@
 import { useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Movie } from "@matfire/the_movie_wrapper/dist/types/movie";
+import { PlaylistDocument } from "../utils/types";
 
 export default function PlaylistDetails() {
   const data = useLoaderData() as {
-    playlist: { name: string };
+    playlist: PlaylistDocument;
     movies: Movie[];
   };
 
@@ -19,7 +20,13 @@ export default function PlaylistDetails() {
       </Helmet>
       <div className="flex justify-between items-center">
         <h2 className="font-bold text-2xl">{data.playlist.name}</h2>
-        <p>{data.movies.length} movies</p>
+        <div className="flex flex-col">
+          <p>{data.movies.length} movies</p>
+          <p>{data.playlist.views} views</p>
+        </div>
+      </div>
+      <div>
+        <p>{data.playlist.description}</p>
       </div>
       <div className="flex flex-col mt-4 space-y-4">
         {data.movies.map((movie: Movie) => (
