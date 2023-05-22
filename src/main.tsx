@@ -20,7 +20,7 @@ import { Query } from "appwrite";
 import client from "./utils/tmdb.ts";
 import Logout from "./pages/Logout.tsx";
 import AuthCallback from "./pages/AuthCallback.tsx";
-import { PlaylistDocument } from "./utils/types.ts";
+import { MovieDocument, PlaylistDocument } from "./utils/types.ts";
 
 const router = createBrowserRouter([
   {
@@ -31,13 +31,13 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
         loader: async () => {
-          const playlists = await getDocuments(
+          const playlists = await getDocuments<PlaylistDocument>(
             import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
             [Query.orderDesc("views")]
           );
           const data = await Promise.all(
-            playlists.documents.map(async (playlist: PlaylistDocument) => {
-              const moviesDocuments = await getDocuments(
+            playlists.documents.map(async (playlist) => {
+              const moviesDocuments = await getDocuments<MovieDocument>(
                 import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
                 [Query.equal("playlist_id", playlist.$id)]
               );
@@ -75,11 +75,11 @@ const router = createBrowserRouter([
           const { id } = params;
           if (!id) return redirect("/?error=Invalid Id");
           try {
-            const playlist = await getDocument(
+            const playlist = await getDocument<PlaylistDocument>(
               import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
               id
             );
-            const moviesDocuments = await getDocuments(
+            const moviesDocuments = await getDocuments<MovieDocument>(
               import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
               [
                 Query.equal("playlist_id", playlist.$id),
