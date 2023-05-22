@@ -14,26 +14,12 @@ module.exports = async (req, res) => {
       data.id
     );
     if (playlist) {
-      const stat = await database.listDocuments(
+      await database.updateDocument(
         req.variables.APPWRITE_DATABASE,
-        req.variables.APPWRITE_STATS_COLLECTION,
-        [sdk.Query.equal("playlist_id", playlist.$id)]
+        req.variables.APPWRITE_PLAYLIST_COLLECTION,
+        playlist.$id,
+        { views: playlist.views + 1 }
       );
-      if (stat.documents.length > 0) {
-        const statDoc = stat.documents[0];
-        await database.updateDocument(
-          req.variables.APPWRITE_DATABASE,
-          req.variables.APPWRITE_STATS_COLLECTION,
-          statDoc.$id,
-          { views: statDoc.views + 1 }
-        );
-      } else {
-        await database.createDocument(
-          req.variables.APPWRITE_DATABASE,
-          req.variables.APPWRITE_STATS_COLLECTION,
-          { playlist_id: playlist.$id, views: 1 }
-        );
-      }
       res.json({
         playlist: true,
       });
