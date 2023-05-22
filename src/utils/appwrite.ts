@@ -33,7 +33,7 @@ async function getDocument<T extends Models.Document>(
   );
 }
 
-const createDocument = (collectionId: string, data: any, roles: any) => {
+const createDocument = (collectionId: string, data: Record<string, unknown>, roles: string[]) => {
   return databases.createDocument(
     import.meta.env.VITE_APPWRITE_DB_ID,
     collectionId,
@@ -46,7 +46,7 @@ const createDocument = (collectionId: string, data: any, roles: any) => {
 const updateDocument = (
   collectionId: string,
   documentId: string,
-  data: any
+  data: Record<string, unknown>
 ) => {
   return databases.updateDocument(
     import.meta.env.VITE_APPWRITE_DB_ID,
