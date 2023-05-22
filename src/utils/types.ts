@@ -9,7 +9,7 @@ export type PlaylistDocument = {
 } & Models.Document;
 
 export type MovieDocument = {
-  tmdb_id: string;
+  tmdb_id: number;
   playlist_id: string;
 } & Models.Document;
 
