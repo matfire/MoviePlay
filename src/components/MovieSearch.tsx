@@ -27,13 +27,14 @@ export default function MovieSearch({
           <span className="label-text">Search</span>
         </label>
         <input
+          disabled={loading}
           type="search"
           id="movies"
-          className="input flex-1"
+          className="input flex-1 input-bordered"
           placeholder="Search for a movie"
           {...register("search")}
         />
-        <button className="btn btn-secondary" type="submit">
+        <button className="btn btn-secondary" type="submit" disabled={loading}>
           Search
         </button>
       </div>
