@@ -76,8 +76,8 @@ export default function PlaylistDetails() {
         </div>
         <div className="flex flex-col">
           <p>{data.movies.length} movies</p>
-          <p>{data.playlist.views} views</p>
-          <p>{data.playlist.likes} likes</p>
+          <p>{data.playlist.views} view{data.playlist.views > 1 ? "s" : ""}</p>
+          <p>{data.playlist.likes} like{data.playlist.likes > 1 ? "s" : ""}</p>
         </div>
       </div>
       <div>

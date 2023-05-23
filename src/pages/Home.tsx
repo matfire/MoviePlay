@@ -8,7 +8,7 @@ import { LoaderPlaylist } from "../utils/types";
 
 export default function Home() {
   const user = useAtomValue(userAtom);
-  let data = useLoaderData() as LoaderPlaylist;
+  const data = useLoaderData() as LoaderPlaylist;
   const [playlists, setPlaylists] = useState<LoaderPlaylist>(data);
 
   const handlePlaylistDelete = async (id: string) => {
@@ -20,13 +20,12 @@ export default function Home() {
       );
       await Promise.all(
         data.playlists
-          .find((e) => e.playlist.$id === id)!
-          .movies.map((movie) =>
+          .find((e) => e.playlist.$id === id)?.movies.map((movie) =>
             deleteDocument(
               import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
               movie.$id
             )
-          )
+          ) || []
       );
       setPlaylists((old) => {
         return {
@@ -50,6 +49,7 @@ export default function Home() {
           <div className="card-body">
             <h2 className="card-title">{playlist.playlist.name}</h2>
             <p>{playlist.movies.length} movies</p>
+            <p>{playlist.playlist.likes} like{playlist.playlist.likes > 1 ? "s" : ""}</p>
             <div className="card-actions justify-end">
               <Link
                 to={`/playlist/${playlist.playlist.$id}`}
