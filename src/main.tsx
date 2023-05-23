@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         loader: async () => {
           const playlists = await getDocuments<PlaylistDocument>(
             import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
-            [Query.orderDesc("views")]
+            [Query.orderDesc("likes")]
           );
           const data = await Promise.all(
             playlists.documents.map(async (playlist) => {
