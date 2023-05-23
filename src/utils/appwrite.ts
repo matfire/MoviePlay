@@ -66,7 +66,7 @@ const deleteDocument = (collectionId: string, documentId: string) => {
 
 const updateStatistic = async (documentId: string) => {
   try {
-    functions.createExecution(
+    return functions.createExecution(
       import.meta.env.VITE_APPWRITE_STATISTICS_FUNCTION_ID,
       JSON.stringify({ id: documentId })
     );

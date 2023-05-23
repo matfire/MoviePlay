@@ -70,10 +70,11 @@ const router = createBrowserRouter([
         loader: async () => {
           try {
             await account.get();
-            return {
-            }
+            return {};
           } catch (error) {
-            return redirect("/?error=You need to be logged in to create a playlist");
+            return redirect(
+              "/?error=You need to be logged in to create a playlist"
+            );
           }
         },
         element: <NewPlaylist />,
@@ -81,10 +82,14 @@ const router = createBrowserRouter([
       {
         path: "/playlist/:id",
         element: <PlaylistDetails />,
-        loader: async ({ params }) => {
+        loader: async ({ params, request }) => {
           const { id } = params;
           if (!id) return redirect("/?error=Invalid Id");
           try {
+            const url = new URL(request.url);
+            if (!url.searchParams.has("fetcher")) {
+              await updateStatistic(id);
+            }
             const playlist = await getDocument<PlaylistDocument>(
               import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
               id
@@ -102,7 +107,6 @@ const router = createBrowserRouter([
                 return res;
               })
             );
-            await updateStatistic(id);
             return {
               playlist,
               movies,

@@ -1,13 +1,57 @@
-import { useLoaderData } from "react-router-dom";
+import { useFetcher, useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Movie } from "@matfire/the_movie_wrapper/dist/types/movie";
 import { PlaylistDocument } from "../utils/types";
+import { useAtomValue } from "jotai";
+import userAtom from "../atoms/userAtom";
+import { Icon } from "@iconify/react";
+import { useEffect, useState } from "react";
+import { updateDocument } from "../utils/appwrite";
 
 export default function PlaylistDetails() {
-  const data = useLoaderData() as {
+  const loaderData = useLoaderData() as {
     playlist: PlaylistDocument;
     movies: Movie[];
   };
+  const [data, setData] = useState<{
+    playlist: PlaylistDocument;
+    movies: Movie[];
+  }>(loaderData);
+  const fetcher = useFetcher();
+  const user = useAtomValue(userAtom);
+  const liked = data.playlist.liked_by.includes(user?.$id || "");
+  const [loading, setLoading] = useState(false);
+  const handleLike = async () => {
+    if (!user) return;
+    setLoading(true);
+    if (liked) {
+      await updateDocument(
+        import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
+        data.playlist.$id,
+        {
+          liked_by: data.playlist.liked_by.filter((id) => id !== user.$id),
+          likes: data.playlist.likes - 1,
+        }
+      );
+    } else {
+      await updateDocument(
+        import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
+        data.playlist.$id,
+        {
+          liked_by: [...data.playlist.liked_by, user.$id],
+          likes: data.playlist.likes + 1,
+        }
+      );
+    }
+    fetcher.load(`/playlist/${data.playlist.$id}?fetcher`);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (fetcher.data) {
+      setData(fetcher.data)
+    }
+  }, [fetcher.data])
 
   return (
     <div>
@@ -19,10 +63,21 @@ export default function PlaylistDetails() {
         <meta property="og:url" content={window.location.href} />
       </Helmet>
       <div className="flex justify-between items-center">
-        <h2 className="font-bold text-2xl">{data.playlist.name}</h2>
+        <div className="flex gap-2 items-center">
+          <h2 className="font-bold text-2xl">{data.playlist.name}</h2>
+          {user && (
+            <button onClick={handleLike} disabled={loading}>
+              <Icon
+                icon={liked ? "mdi:heart" : "mdi:heart-outline"}
+                className="text-2xl"
+              />
+            </button>
+          )}
+        </div>
         <div className="flex flex-col">
           <p>{data.movies.length} movies</p>
           <p>{data.playlist.views} views</p>
+          <p>{data.playlist.likes} likes</p>
         </div>
       </div>
       <div>

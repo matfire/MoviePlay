@@ -6,6 +6,8 @@ export type PlaylistDocument = {
   private: boolean;
   views: number;
   description?: string;
+  likes: number;
+  liked_by: string[];
 } & Models.Document;
 
 export type MovieDocument = {
