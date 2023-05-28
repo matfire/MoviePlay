@@ -1,10 +1,17 @@
 import { useAtomValue } from "jotai";
 import userAtom from "../atoms/userAtom";
 import { avatars } from "../utils/appwrite";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { FieldValues, useForm } from "react-hook-form";
 
 export default function Header() {
   const user = useAtomValue(userAtom);
+  const navigate = useNavigate();
+  const {register, handleSubmit} = useForm();
+
+  const onSearch = (data: FieldValues) => {
+    navigate(`/search?query=${data.search}`);
+  };
 
   return (
     <header>
@@ -15,6 +22,11 @@ export default function Header() {
           </NavLink>
         </div>
         <div className="flex-none gap-2">
+          <form className="flex" onSubmit={handleSubmit(onSearch)}>
+            <div className="form-control">
+              <input className="input input-bordered" type="search" {...register("search", {required:true})} placeholder="search..."/>
+            </div>
+          </form>
           {user && (
             <NavLink
               to="/playlist/new"

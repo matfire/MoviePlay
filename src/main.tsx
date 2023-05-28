@@ -22,6 +22,7 @@ import client from "./utils/tmdb.ts";
 import Logout from "./pages/Logout.tsx";
 import AuthCallback from "./pages/AuthCallback.tsx";
 import { MovieDocument, PlaylistDocument } from "./utils/types.ts";
+import Search from "./pages/Search.tsx";
 
 const router = createBrowserRouter([
   {
@@ -114,6 +115,37 @@ const router = createBrowserRouter([
           } catch (error) {
             return redirect("/?error=Playlist not found");
           }
+        },
+      },
+      {
+        path: "/search",
+        element: <Search />,
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const query = url.searchParams.get("query");
+          if (!query) return redirect("/?error=Invalid search argument");
+          const playlists = await getDocuments<PlaylistDocument>(
+            import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
+            [
+              Query.search("searchable_field", query),
+              Query.orderDesc("likes"),
+            ]
+          );
+          const data = await Promise.all(
+            playlists.documents.map(async (playlist) => {
+              const moviesDocuments = await getDocuments<MovieDocument>(
+                import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
+                [Query.equal("playlist_id", playlist.$id)]
+              );
+              return {
+                playlist,
+                movies: moviesDocuments.documents,
+              };
+            })
+          );
+          return {
+            playlists: data,
+          };
         },
       },
     ],

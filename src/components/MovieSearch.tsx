@@ -13,12 +13,25 @@ export default function MovieSearch({
 }) {
   const [results, setResults] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const { register, handleSubmit } = useForm();
   const [animationParent] = useAutoAnimate();
 
+  const loadNextPage = async () => {
+    setLoading(true)
+    const res = await client.movies.search({ query: search, page: page + 1 });
+    if (res.results.length === 0) return;
+    setPage(page + 1)
+    setResults((old) => [...old, ...res.results]);
+    setLoading(false)
+  }
+
   const searchMovies: SubmitHandler<FieldValues> = async (data) => {
     setLoading(true);
-    const res = await client.movies.search({ query: data.search });
+    setPage(1)
+    const res = await client.movies.search({ query: data.search, page });
+    setSearch(data.search);
     setResults(res.results);
     setLoading(false);
   };
@@ -70,6 +83,7 @@ export default function MovieSearch({
             </div>
           </div>
         ))}
+        {results.length > 0 && <button className="btn btn-primary" onClick={loadNextPage}>Load More</button>}
       </div>
     </form>
   );

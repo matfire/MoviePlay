@@ -8,6 +8,7 @@ export type PlaylistDocument = {
   description?: string;
   likes: number;
   liked_by: string[];
+  searchable_field: string;
 } & Models.Document;
 
 export type MovieDocument = {

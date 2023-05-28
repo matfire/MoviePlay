@@ -5,6 +5,7 @@ import { useState } from "react";
 import userAtom from "../atoms/userAtom";
 import { deleteDocument } from "../utils/appwrite";
 import { LoaderPlaylist } from "../utils/types";
+import PlaylistCard from "../components/PlaylistCard";
 
 export default function Home() {
   const user = useAtomValue(userAtom);
@@ -42,32 +43,7 @@ export default function Home() {
   return (
     <div className="flex justify-evenly flex-wrap">
       {playlists.playlists.map((playlist) => (
-        <div
-          key={playlist.playlist.$id}
-          className="card w-96 bg-base-100 shadow-xl"
-        >
-          <div className="card-body">
-            <h2 className="card-title">{playlist.playlist.name}</h2>
-            <p>{playlist.movies.length} movies</p>
-            <p>{playlist.playlist.likes} like{playlist.playlist.likes > 1 ? "s" : ""}</p>
-            <div className="card-actions justify-end">
-              <Link
-                to={`/playlist/${playlist.playlist.$id}`}
-                className="btn btn-primary"
-              >
-                Details
-              </Link>
-              {user && user.$id === playlist.playlist.author && (
-                <button
-                  className="btn btn-error"
-                  onClick={() => handlePlaylistDelete(playlist.playlist.$id)}
-                >
-                  Delete
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
+        <PlaylistCard playlist={playlist} handlePlaylistDelete={handlePlaylistDelete} />
       ))}
     </div>
   );

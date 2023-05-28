@@ -34,6 +34,7 @@ export default function NewPlaylist() {
           private: data.private,
           description: data.description || null,
           author: user?.$id,
+          searchable_field: `${data.name} ${data.description}`
         },
         permissions
       );
