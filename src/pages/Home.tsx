@@ -1,14 +1,11 @@
-import { useAtomValue } from "jotai";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
-import userAtom from "../atoms/userAtom";
 import { deleteDocument } from "../utils/appwrite";
 import { LoaderPlaylist } from "../utils/types";
 import PlaylistCard from "../components/PlaylistCard";
 
 export default function Home() {
-  const user = useAtomValue(userAtom);
   const data = useLoaderData() as LoaderPlaylist;
   const [playlists, setPlaylists] = useState<LoaderPlaylist>(data);
 
