@@ -11,9 +11,10 @@ export default function Login() {
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center shadow-md">
-      <div className="card">
+      <div className="card shadow-md">
         <div className="card-body">
           <h1 className="card-title">Login</h1>
+          <p>Please choose one of the following providers</p>
           <div className="space-x-2">
             <button
               onClick={() => login("google")}
@@ -28,6 +29,10 @@ export default function Login() {
             >
               <Icon icon="devicon:github" className="text-lg" />
               Github
+            </button>
+            <button onClick={() => login("discord")} className="btn btn-accent gap-2">
+              <Icon icon="skill-icons:discord" className="text-lg" />
+              Discord
             </button>
           </div>
         </div>
