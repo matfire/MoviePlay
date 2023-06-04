@@ -4,6 +4,7 @@ import { useState } from "react";
 import { deleteDocument } from "../utils/appwrite";
 import { LoaderPlaylist } from "../utils/types";
 import PlaylistCard from "../components/PlaylistCard";
+import { Helmet } from "react-helmet";
 
 export default function Home() {
   const data = useLoaderData() as LoaderPlaylist;
@@ -39,6 +40,9 @@ export default function Home() {
 
   return (
     <div className="flex justify-evenly flex-wrap">
+      <Helmet>
+        <title>Home | MoviePlay</title>
+      </Helmet>
       {playlists.playlists.map((playlist) => (
         <PlaylistCard playlist={playlist} handlePlaylistDelete={handlePlaylistDelete} />
       ))}

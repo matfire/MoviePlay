@@ -9,6 +9,7 @@ import { Permission, Role } from "appwrite";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 export default function NewPlaylist() {
   const { register, handleSubmit } = useForm();
@@ -68,6 +69,9 @@ export default function NewPlaylist() {
   };
   return (
     <div>
+      <Helmet>
+        <title>New Playlist | MoviePlay</title>
+      </Helmet>
       <form onSubmit={handleSubmit(createPlaylist)}>
         <div className="form-control">
           <label htmlFor="name" className="label">

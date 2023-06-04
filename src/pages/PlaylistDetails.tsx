@@ -56,9 +56,9 @@ export default function PlaylistDetails() {
   return (
     <div>
       <Helmet>
-        <title>{data.playlist.name} | Movie List</title>
+        <title>{data.playlist.name} | MoviePlay</title>
         <meta property="og:title" content={data.playlist.name} />
-        <meta property="og:description" content="Movie List" />
+        <meta property="og:description" content="MoviePlay" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
       </Helmet>

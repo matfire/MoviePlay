@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { account } from "../utils/appwrite";
 import { Icon } from "@iconify/react";
 
@@ -11,6 +12,9 @@ export default function Login() {
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center shadow-md">
+      <Helmet>
+        <title>Login | MoviePlay</title>
+      </Helmet>
       <div className="card shadow-md">
         <div className="card-body">
           <h1 className="card-title">Login</h1>
