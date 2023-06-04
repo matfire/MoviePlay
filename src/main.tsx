@@ -23,11 +23,20 @@ import Logout from "./pages/Logout.tsx";
 import AuthCallback from "./pages/AuthCallback.tsx";
 import { MovieDocument, PlaylistDocument } from "./utils/types.ts";
 import Search from "./pages/Search.tsx";
+import Profile from "./pages/Profile.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader: async () => {
+      try {
+        const user = await account.get();
+        return {user}
+      } catch (error) {
+        return null
+      }
+    },
     children: [
       {
         path: "/",
@@ -65,6 +74,38 @@ const router = createBrowserRouter([
       {
         path: "/auth/callback",
         element: <AuthCallback />,
+      },
+      {
+        path: "/profile",
+        loader: async () => {
+          try {
+            await account.get();
+            const playlists = await getDocuments<PlaylistDocument>(
+              import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
+              [Query.orderDesc("likes")]
+            );
+            const data = await Promise.all(
+              playlists.documents.map(async (playlist) => {
+                const moviesDocuments = await getDocuments<MovieDocument>(
+                  import.meta.env.VITE_APPWRITE_PLAYLIST_ITEM_COLLECTION_ID,
+                  [Query.equal("playlist_id", playlist.$id)]
+                );
+                return {
+                  playlist,
+                  movies: moviesDocuments.documents,
+                };
+              })
+            );
+            return {
+              playlists: data,
+            };
+          } catch (error) {
+            return redirect(
+              "/?error=You need to be logged in to view your profile"
+            );
+          }
+        },
+        element: <Profile />,
       },
       {
         path: "/playlist/new",
@@ -126,10 +167,7 @@ const router = createBrowserRouter([
           if (!query) return redirect("/?error=Invalid search argument");
           const playlists = await getDocuments<PlaylistDocument>(
             import.meta.env.VITE_APPWRITE_PLAYLIST_COLLECTION_ID,
-            [
-              Query.search("searchable_field", query),
-              Query.orderDesc("likes"),
-            ]
+            [Query.search("searchable_field", query), Query.orderDesc("likes")]
           );
           const data = await Promise.all(
             playlists.documents.map(async (playlist) => {

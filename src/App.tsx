@@ -1,4 +1,4 @@
-import { Outlet, useSearchParams } from "react-router-dom";
+import { Outlet, useLoaderData, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useSetAtom } from "jotai";
 import userAtom from "./atoms/userAtom";
@@ -6,8 +6,10 @@ import { account } from "./utils/appwrite";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
+import { Models } from "appwrite";
 
 function App() {
+  const userData = useLoaderData() as {user: Models.Preferences }
   const setUser = useSetAtom(userAtom);
   const [searchParams] = useSearchParams();
   useEffect(() => {
@@ -20,7 +22,8 @@ function App() {
       }
     };
     getCurrentUser();
-  }, []);
+    setUser(userData.user)
+  }, [setUser, userData]);
   return (
     <>
       <Header />

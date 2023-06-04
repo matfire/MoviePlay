@@ -4,7 +4,7 @@ export default function Footer() {
       <div>
         <p>
           Copyright © {new Date().getFullYear()} - All right reserved by Matteo
-          Gassend
+          Gassend, made with ❤️, <a href="https://appwrite.io">Appwrite</a> and <a href="https://themoviedb.org">TMDB</a>
         </p>
       </div>
     </footer>
