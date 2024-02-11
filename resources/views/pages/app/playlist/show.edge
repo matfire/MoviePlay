@@ -2,7 +2,7 @@
 <h1>{{playlist.name}}</h1>
 <p>{{playlist.description}}</p>
 
-@if (!playlist.movies)
+@if (!movies)
 no movies found.
 @endif
 
@@ -11,7 +11,7 @@ no movies found.
 @endif
 
 @each(movie in movies)
-<p>movie here</p>
+<p>{{movie.title}}</p>
 @end
 
 @end
