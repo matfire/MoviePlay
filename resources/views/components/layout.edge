@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <title>MoviePlay</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @vite(['resources/js/app.js'])
+    @if($slots.header)
+    {{{await $slots.header()}}}
+    @endif
+</head>
+
+<body class="h-screen p-0 m-0 flex flex-col">
+    <header></header>
+    <main class="flex-1">
+        {{{await $slots.main()}}}
+    </main>
+    <footer>
+        &copy; 2024 MoviePlay
+        @if($slots.footer)
+        {{{await $slots.footer()}}}
+        @endif
+    </footer>
+</body>
+
+</html>

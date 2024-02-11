@@ -1,0 +1,17 @@
+@layout()
+<h1>{{playlist.name}}</h1>
+<p>{{playlist.description}}</p>
+
+@if (!playlist.movies)
+no movies found.
+@endif
+
+@if(auth.isAuthenticated && playlist.userId === auth.user.id)
+<a href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">Add More</a>
+@endif
+
+@each(movie in movies)
+<p>movie here</p>
+@end
+
+@end

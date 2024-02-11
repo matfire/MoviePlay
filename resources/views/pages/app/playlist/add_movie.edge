@@ -1,0 +1,19 @@
+@layout()
+<h1>Add Movie</h1>
+
+<form method="get" action="{{route('app_playlists.add_movie', {playlistId: playlist.id})}}">
+    <input type="search" name="query">
+    <button type="submit">Search</button>
+</form>
+
+@each(movie in movies)
+<p>{{movie.title}}</p>
+<form method="post" action="{{route('app_playlists.store_add_movie', {playlistId: playlist.id})}}">
+    {{ csrfField() }}
+
+    <input name="tmdbId" type="hidden" value="{{movie.id}}">
+    <button type="submit">add</button>
+</form>
+@end
+
+@end

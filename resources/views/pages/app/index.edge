@@ -1,0 +1,11 @@
+@layout()
+@if(playlists.length === 0)
+no playlists found
+@end
+<div>
+    @each(playlist in playlists)
+    <a href="{{route('app_playlists.show', {id: playlist.id})}}">{{playlist.name}}</a>
+    @end
+</div>
+<a href="{{route('app_playlists.create')}}">Create</a>
+@end
