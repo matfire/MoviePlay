@@ -2,6 +2,7 @@ import Playlist from '#models/playlist'
 import env from '#start/env'
 import API from '@matfire/the_movie_wrapper'
 import type { HttpContext } from '@adonisjs/core/http'
+import Movie from '#models/movie'
 
 export default class PlaylistsController {
   // index({ view }: HttpContext) {
@@ -26,8 +27,15 @@ export default class PlaylistsController {
   async show({ view, params, auth }: HttpContext) {
     await auth.authenticate()
     const playlist = await Playlist.findOrFail(params.id)
-    console.log(playlist.movies)
-    return view.render('pages/app/playlist/show', { playlist })
+    const tmdbClient = await new API(env.get('TMDB_API_KEY'))
+    const movies = await Promise.all(
+      (await Movie.query().where('playlistId', playlist.id)).map(async (e) => {
+        const data = await tmdbClient.movies.getMovie(e.tmdbId)
+        return data
+      })
+    )
+    console.log(movies)
+    return view.render('pages/app/playlist/show', { playlist, movies })
   }
 
   async showAddMovie({ view, auth, request, params }: HttpContext) {
@@ -46,6 +54,15 @@ export default class PlaylistsController {
 
   async storeAddMovie({ view, auth, request, response, params }: HttpContext) {
     const data = request.all()
+    await auth.authenticate()
+    //TODO check if user is playlist author
+    const playlist = await Playlist.find(params.playlistId)
+    const order = (playlist?.movies?.sort((a, b) => a.order - b.order).pop()?.order ?? 0) + 1
+    const movie = await Movie.create({
+      tmdbId: data.tmdbId,
+      playlistId: playlist.id,
+      order,
+    })
     console.log(data)
     return response.redirect().toRoute('app_playlists.add_movie', { playlistId: params.playlistId })
   }
