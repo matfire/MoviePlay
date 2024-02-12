@@ -1,7 +1,10 @@
-<div class="relative flex flex-col @container lg:flex-row">
-    <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" class="" />
-    <div class="hidden @lg:flex flex-col">
-        <h2 class="font-bold text-2xl">{{movie.title}}</h2>
-        <p>{{movie.overview}}</p>
+<div class="@container">
+    <div class="relative flex flex-col @lg:flex-row">
+        <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" class="w-full @lg:w-96 h-auto" />
+        <div class="flex flex-col p-4">
+            <h2 class="font-bold text-2xl">{{movie.title}}</h2>
+            <h3 class="font-light text-xl">{{movie.tagline}}</h3>
+            <p>{{movie.overview}}</p>
+        </div>
     </div>
 </div>
