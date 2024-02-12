@@ -9,9 +9,11 @@ no movies found.
 @if(auth.isAuthenticated && playlist.userId === auth.user.id)
 <a href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">Add More</a>
 @endif
-
-@each(movie in movies)
-<p>{{movie.title}}</p>
+<div>
+    @each(movie in movies)
+    @component('components/movie_card', { movie })
+    @end
+</div>
 @end
 
 @end
