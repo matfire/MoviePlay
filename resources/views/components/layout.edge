@@ -11,7 +11,12 @@
 </head>
 
 <body class="h-screen p-0 m-0 flex flex-col">
-    <header></header>
+    <header>
+        <div class="flex justify-between items-center">
+
+            <a href="{{auth.isAuthenticated ? '/app' : '/'}}">Movieplay</a>
+        </div>
+    </header>
     <main class="flex-1">
         {{{await $slots.main()}}}
     </main>
