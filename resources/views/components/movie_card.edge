@@ -7,6 +7,9 @@
             <h3 class="font-light text-xl">{{movie.tagline}}</h3>
             @end
             <p>{{movie.overview}}</p>
+            @if($slots.main)
+            {{{await $slots.main()}}}
+            @end
         </div>
     </div>
 </div>

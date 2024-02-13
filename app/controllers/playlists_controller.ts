@@ -30,7 +30,7 @@ export default class PlaylistsController {
     const playlist = await Playlist.findOrFail(params.id)
     const tmdbClient = await new API(env.get('TMDB_API_KEY'))
     const movies = await Promise.all(
-      (await Movie.query().where('playlistId', playlist.id)).map(async (e) => {
+      (await Movie.query().where('playlistId', playlist.id).orderBy('order')).map(async (e) => {
         const data = await bento.getOrSet(
           `${e.tmdbId}`,
           () => {
@@ -42,7 +42,10 @@ export default class PlaylistsController {
         return data
       })
     )
-    return view.render('pages/app/playlist/show', { playlist, movies })
+    return view.render('pages/app/playlist/show', {
+      playlist,
+      movies,
+    })
   }
 
   async showAddMovie({ view, auth, request, params }: HttpContext) {
@@ -81,9 +84,10 @@ export default class PlaylistsController {
       (await Movie.query().where('playlistId', playlist.id)).map(async (e) => {
         const data = await bento.getOrSet(
           `${e.tmdbId}`,
-          () => {
+          async () => {
             console.log(`id ${e.tmdbId} not found in cache, fetching...`)
-            return tmdbClient.movies.getMovie(e.tmdbId)
+            const data = await tmdbClient.movies.getMovie(e.tmdbId)
+            return { ...data, order: e.order }
           },
           { ttl: '5m' }
         )
@@ -100,6 +104,24 @@ export default class PlaylistsController {
     playlist.name = data.name
     playlist.description = data.description
     playlist.isPublic = data.isPublic
+    const moviesOrder = new Map<number, number>()
+    Object.keys(data).forEach((e) => {
+      if (e.startsWith('movie_order')) {
+        if (moviesOrder.has(Number.parseInt(e.split(':')[1]))) {
+          throw new Error('duplicate movie order set')
+        }
+        const id = Number.parseInt(e.split(':')[1])
+        moviesOrder.set(id, Number.parseInt(data[e]))
+      }
+    })
+    const movies = await Movie.query().where('playlistId', playlist.id)
+    for (const movie of movies) {
+      if (moviesOrder.has(movie.tmdbId)) {
+        movie.order = moviesOrder.get(movie.tmdbId)!
+        await movie.save()
+      }
+    }
+    console.log(moviesOrder)
     await playlist.save()
     return response.redirect().toRoute('app_playlists.show', { id: params.id })
   }

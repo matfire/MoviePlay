@@ -8,6 +8,9 @@
     <div>
         @each(movie in movies)
         @component('components/movie_card', { movie })
+        <label for="movie_order_{{movie.id}}">{{t('playlists.edit.order_change_label')}}</label>
+        <input type="number" value="{{movie.order}}" name="movie_order:{{movie.id}}">
+        @end
         @end
     </div>
 </form>
