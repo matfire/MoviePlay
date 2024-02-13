@@ -16,7 +16,6 @@ export default class PlaylistsController {
   async store({ request, response, auth }: HttpContext) {
     const data = await request.all()
     const user = await auth.authenticate()
-    console.log(data)
     const p = await Playlist.create({
       userId: user.id,
       isPublic: data.isPublic,
@@ -51,15 +50,14 @@ export default class PlaylistsController {
     const playlist = await Playlist.find(params.playlistId)
     const data = request.all()
     let movies = null
-    console.log(data)
     if (data.query) {
       const res = await new API(env.get('TMDB_API_KEY')).movies.search({ query: data.query })
       movies = res.results
     }
-    return view.render('pages/app/playlist/add_movie', { playlist, movies })
+    return view.render('pages/app/playlist/add_movie', { playlist, movies, query: data.query })
   }
 
-  async storeAddMovie({ view, auth, request, response, params }: HttpContext) {
+  async storeAddMovie({ auth, request, response, params }: HttpContext) {
     const data = request.all()
     await auth.authenticate()
     //TODO check if user is playlist author
@@ -70,8 +68,13 @@ export default class PlaylistsController {
       playlistId: playlist.id,
       order,
     })
-    console.log(data)
-    return response.redirect().toRoute('app_playlists.add_movie', { playlistId: params.playlistId })
+    return response
+      .redirect()
+      .toRoute(
+        'app_playlists.add_movie',
+        { playlistId: params.playlistId },
+        { qs: { query: data.query } }
+      )
   }
   async edit({ view, params, auth }: HttpContext) {
     await auth.authenticate()

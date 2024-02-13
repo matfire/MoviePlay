@@ -12,7 +12,7 @@
 @end
 <form method="post" action="{{route('app_playlists.store_add_movie', {playlistId: playlist.id})}}">
     {{ csrfField() }}
-
+    <input type="hidden" name="query" value="{{query}}">
     <input name="tmdbId" type="hidden" value="{{movie.id}}">
     <button type="submit">add</button>
 </form>
