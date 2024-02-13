@@ -1,9 +1,8 @@
 import Playlist from '#models/playlist'
 import env from '#start/env'
-import API from '@matfire/the_movie_wrapper'
 import type { HttpContext } from '@adonisjs/core/http'
 import Movie from '#models/movie'
-import { bento } from '#config/bento'
+import MovieService from '#services/movie_service'
 
 export default class PlaylistsController {
   // index({ view }: HttpContext) {
@@ -27,20 +26,12 @@ export default class PlaylistsController {
   async show({ view, params, auth }: HttpContext) {
     await auth.authenticate()
     const playlist = await Playlist.findOrFail(params.id)
-    const tmdbClient = await new API(env.get('TMDB_API_KEY'))
-    const movies = await Promise.all(
-      (await Movie.query().where('playlistId', playlist.id).orderBy('order')).map(async (e) => {
-        const data = await bento.getOrSet(
-          `${e.tmdbId}`,
-          () => {
-            console.log(`id ${e.tmdbId} not found in cache, fetching...`)
-            return tmdbClient.movies.getMovie(e.tmdbId)
-          },
-          { ttl: '5m' }
-        )
-        return data
-      })
-    )
+    const moviesDb = await Movie.query().where('playlistId', playlist.id)
+    const movies = []
+    for (const movie of moviesDb) {
+      const data = await MovieService.getMovie(movie.tmdbId)
+      movies.push(data)
+    }
     return view.render('pages/app/playlist/show', {
       playlist,
       movies,
@@ -82,21 +73,12 @@ export default class PlaylistsController {
   async edit({ view, params, auth }: HttpContext) {
     await auth.authenticate()
     const playlist = await Playlist.findOrFail(params.id)
-    const tmdbClient = await new API(env.get('TMDB_API_KEY'))
-    const movies = await Promise.all(
-      (await Movie.query().where('playlistId', playlist.id)).map(async (e) => {
-        const data = await bento.getOrSet(
-          `${e.tmdbId}`,
-          async () => {
-            console.log(`id ${e.tmdbId} not found in cache, fetching...`)
-            const res = await tmdbClient.movies.getMovie(e.tmdbId)
-            return { ...res, order: e.order }
-          },
-          { ttl: '5m' }
-        )
-        return data
-      })
-    )
+    const moviesDb = await Movie.query().where('playlistId', playlist.id)
+    const movies = []
+    for (const movie of moviesDb) {
+      const data = await MovieService.getMovie(movie.tmdbId)
+      movies.push({ ...data, order: movie.order })
+    }
     return view.render('pages/app/playlist/edit', { playlist, movies })
   }
   async update({ request, response, params, auth }: HttpContext) {
