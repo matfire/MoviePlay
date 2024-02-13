@@ -7,7 +7,9 @@
 </form>
 
 @each(movie in movies)
-<p>{{movie.title}}</p>
+@component('components/movie_card', { movie })
+
+@end
 <form method="post" action="{{route('app_playlists.store_add_movie', {playlistId: playlist.id})}}">
     {{ csrfField() }}
 

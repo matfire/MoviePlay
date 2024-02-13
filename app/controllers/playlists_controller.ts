@@ -34,7 +34,6 @@ export default class PlaylistsController {
         return data
       })
     )
-    console.log(movies)
     return view.render('pages/app/playlist/show', { playlist, movies })
   }
 
@@ -66,12 +65,29 @@ export default class PlaylistsController {
     console.log(data)
     return response.redirect().toRoute('app_playlists.add_movie', { playlistId: params.playlistId })
   }
-  // edit({ view }: HttpContext) {
-  //   return view.render('playlists/edit')
-  // }
-  // update({ view }: HttpContext) {
-  //   return view.render('playlists/update')
-  // }
+  async edit({ view, params, auth }: HttpContext) {
+    await auth.authenticate()
+    const playlist = await Playlist.findOrFail(params.id)
+    const tmdbClient = await new API(env.get('TMDB_API_KEY'))
+    const movies = await Promise.all(
+      (await Movie.query().where('playlistId', playlist.id)).map(async (e) => {
+        const data = await tmdbClient.movies.getMovie(e.tmdbId)
+        return data
+      })
+    )
+    return view.render('pages/app/playlist/edit', { playlist, movies })
+  }
+  async update({ request, response, params, auth }: HttpContext) {
+    await auth.authenticate()
+    const playlist = await Playlist.findOrFail(params.id)
+    const data = request.all()
+    console.log(data)
+    playlist.name = data.name
+    playlist.description = data.description
+    playlist.isPublic = data.isPublic
+    await playlist.save()
+    return response.redirect().toRoute('app_playlists.show', { id: params.id })
+  }
   // destroy({ view }: HttpContext) {
   //   return view.render('playlists/destroy')
   // }

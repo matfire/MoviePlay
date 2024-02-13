@@ -8,6 +8,7 @@ no movies found.
 
 @if(auth.isAuthenticated && playlist.userId === auth.user.id)
 <a href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">Add More</a>
+<a href="{{route('app_playlists.edit', {id: playlist.id})}}">Edit</a>
 @endif
 <div>
     @each(movie in movies)
