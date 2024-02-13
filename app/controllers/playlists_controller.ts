@@ -63,9 +63,9 @@ export default class PlaylistsController {
     const data = request.all()
     await auth.authenticate()
     //TODO check if user is playlist author
-    const playlist = await Playlist.find(params.playlistId)
+    const playlist = await Playlist.findOrFail(params.playlistId)
     const order = (playlist?.movies?.sort((a, b) => a.order - b.order).pop()?.order ?? 0) + 1
-    const movie = await Movie.create({
+    await Movie.create({
       tmdbId: data.tmdbId,
       playlistId: playlist.id,
       order,
