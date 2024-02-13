@@ -18,7 +18,7 @@ export default class PlaylistsController {
     const user = await auth.authenticate()
     const p = await Playlist.create({
       userId: user.id,
-      isPublic: data.isPublic,
+      isPublic: data.isPublic === 'on',
       name: data.title,
       description: data.description,
     })
@@ -89,8 +89,8 @@ export default class PlaylistsController {
           `${e.tmdbId}`,
           async () => {
             console.log(`id ${e.tmdbId} not found in cache, fetching...`)
-            const data = await tmdbClient.movies.getMovie(e.tmdbId)
-            return { ...data, order: e.order }
+            const res = await tmdbClient.movies.getMovie(e.tmdbId)
+            return { ...res, order: e.order }
           },
           { ttl: '5m' }
         )
@@ -103,10 +103,9 @@ export default class PlaylistsController {
     await auth.authenticate()
     const playlist = await Playlist.findOrFail(params.id)
     const data = request.all()
-    console.log(data)
     playlist.name = data.name
     playlist.description = data.description
-    playlist.isPublic = data.isPublic
+    playlist.isPublic = data.isPublic === 'on'
     const moviesOrder = new Map<number, number>()
     Object.keys(data).forEach((e) => {
       if (e.startsWith('movie_order')) {
@@ -119,12 +118,11 @@ export default class PlaylistsController {
     })
     const movies = await Movie.query().where('playlistId', playlist.id)
     for (const movie of movies) {
-      if (moviesOrder.has(movie.tmdbId)) {
+      if (moviesOrder.has(movie.tmdbId) && !Number.isNaN(moviesOrder.get(movie.tmdbId))) {
         movie.order = moviesOrder.get(movie.tmdbId)!
         await movie.save()
       }
     }
-    console.log(moviesOrder)
     await playlist.save()
     return response.redirect().toRoute('app_playlists.show', { id: params.id })
   }
