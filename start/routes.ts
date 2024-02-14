@@ -38,3 +38,7 @@ router
   .post('/app/playlists/:playlistId/movies', [PlaylistsController, 'storeAddMovie'])
   .as('app_playlists.store_add_movie')
   .use(middleware.auth())
+router.get('/theme/:color', async ({ params, session, response }) => {
+  session.put('theme', params.color)
+  response.redirect().back()
+})
