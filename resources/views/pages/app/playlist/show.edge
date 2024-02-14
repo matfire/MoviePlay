@@ -2,7 +2,7 @@
 
 @unless(!movies)
 <div class="relative w-full h-screen">
-    <div class="absolute top-0 left-0 bg-black/70 w-full h-full">
+    <div class="absolute top-0 left-0 bg-black/50 w-full h-full">
         <div class="w-full h-full bg-cover bg-no-repeat absolute -z-10"
             style="background-image: url('https://image.tmdb.org/t/p/original/{{movies[0].backdrop_path}}');">
         </div>
@@ -23,11 +23,11 @@ no movies found.
 <a href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">Add More</a>
 <a href="{{route('app_playlists.edit', {id: playlist.id})}}">Edit</a>
 @endif
-<div>
+<div class="@container w-full space-y-4">
     @each(movie in movies)
     @component('components/movie_card', { movie })
     @end
+    @end
 </div>
-@end
 
 @end

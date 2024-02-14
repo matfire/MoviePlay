@@ -20,7 +20,7 @@
     <main class="flex-1">
         {{{await $slots.main()}}}
     </main>
-    <footer>
+    <footer class="mt-4">
         &copy; 2024 MoviePlay
         <form action="/theme/{{session.get('theme') && session.get('theme') === 'light' ? 'dark' : 'light'}}">
             <button type="submit">Toggle Theme</button>
