@@ -3,6 +3,7 @@ import env from '#start/env'
 import type { HttpContext } from '@adonisjs/core/http'
 import Movie from '#models/movie'
 import MovieService from '#services/movie_service'
+import API from '@matfire/the_movie_wrapper'
 
 export default class PlaylistsController {
   // index({ view }: HttpContext) {
@@ -23,13 +24,14 @@ export default class PlaylistsController {
     })
     return response.redirect().toRoute('app_playlists.show', { id: p.id })
   }
-  async show({ view, params, auth }: HttpContext) {
+  async show({ view, params, auth, i18n }: HttpContext) {
     await auth.authenticate()
+    const lang = i18n.locale
     const playlist = await Playlist.findOrFail(params.id)
     const moviesDb = await Movie.query().where('playlistId', playlist.id)
     const movies = []
     for (const movie of moviesDb) {
-      const data = await MovieService.getMovie(movie.tmdbId)
+      const data = await MovieService.getMovie(movie.tmdbId, lang)
       movies.push(data)
     }
     return view.render('pages/app/playlist/show', {
@@ -70,13 +72,13 @@ export default class PlaylistsController {
         { qs: { query: data.query } }
       )
   }
-  async edit({ view, params, auth }: HttpContext) {
+  async edit({ view, params, auth, i18n }: HttpContext) {
     await auth.authenticate()
     const playlist = await Playlist.findOrFail(params.id)
     const moviesDb = await Movie.query().where('playlistId', playlist.id)
     const movies = []
     for (const movie of moviesDb) {
-      const data = await MovieService.getMovie(movie.tmdbId)
+      const data = await MovieService.getMovie(movie.tmdbId, i18n.locale)
       movies.push({ ...data, order: movie.order })
     }
     return view.render('pages/app/playlist/edit', { playlist, movies })
