@@ -2,22 +2,26 @@
 <div class="w-full h-screen flex flex-col justify-center items-center">
     <h1 class="text-8xl">MOVIEPLAY</h1>
     <p>view movies however you want to</p>
-    <a href="/app" class="dark:border-white border-black border px-4 py-2 rounded-lg mt-2 hover:scale-105 transition-transform">Get Started</a>
+    <a href="/app"
+        class="dark:border-white border-black border px-4 py-2 rounded-lg mt-2 hover:scale-105 transition-transform">Get
+        Started</a>
 </div>
 <div class="flex my-16 flex-col justify-center items-center ">
     <h3>Features</h3>
     <div class="flex justify-evenly w-full">
         <div class="flex flex-col items-center">
-            <img src="{{asset('resources/img/icon_create.svg')}}" class="w-16 h-16 dark:text-white" alt="playlist icon" />
+            @svg("ic:round-playlist-play")
             <p>Create your own playlists</p>
         </div>
         <div class="flex flex-col items-center">
-            <img src="{{asset('resources/img/icon_share.svg')}}" class="w-16 h-16 dark:text-white" alt="playlist icon" />
+            <img src="{{asset('resources/img/icon_share.svg')}}" class="w-16 h-16 dark:text-white"
+                alt="playlist icon" />
             <p>Share them</p>
         </div>
         <div class="flex flex-col items-center">
-            
-            <img src="{{asset('resources/img/icon_comment.svg')}}" class="w-16 h-16 dark:text-white" alt="playlist icon" />
+
+            <img src="{{asset('resources/img/icon_comment.svg')}}" class="w-16 h-16 dark:text-white"
+                alt="playlist icon" />
             <p>Comment others' creations</p>
         </div>
     </div>

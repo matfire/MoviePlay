@@ -16,12 +16,14 @@
 
 
 @if (!movies)
-no movies found.
+<p>
+    {{t('playlists.show.no_movies')}}
+</p>
 @endif
 
 @if(auth.isAuthenticated && playlist.userId === auth.user.id)
-<a href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">Add More</a>
-<a href="{{route('app_playlists.edit', {id: playlist.id})}}">Edit</a>
+<a href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">{{t('playlists.show.add_movie')}}</a>
+<a href="{{route('app_playlists.edit', {id: playlist.id})}}">{{t('playlists.show.edit')}}</a>
 @endif
 <div class="@container w-full space-y-4">
     @each(movie in movies)
