@@ -1,5 +1,10 @@
 {
   "edit": {
     "order_change_label": "Choisir l'ordre de ce film"
+  },
+  "show": {
+    "add_movie": "ajouter un film",
+    "edit": "modifier la playlist",
+    "no_movies": "aucun film trouvé"
   }
 }
