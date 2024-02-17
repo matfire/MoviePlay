@@ -4,6 +4,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Movie from '#models/movie'
 import MovieService from '#services/movie_service'
 import API from '@matfire/the_movie_wrapper'
+import Hit from '#models/hit'
 
 export default class PlaylistsController {
   // index({ view }: HttpContext) {
@@ -25,9 +26,12 @@ export default class PlaylistsController {
     return response.redirect().toRoute('app_playlists.show', { id: p.id })
   }
   async show({ view, params, auth, i18n }: HttpContext) {
-    await auth.authenticate()
+    const user = await auth.authenticate()
     const lang = i18n.locale
     const playlist = await Playlist.findOrFail(params.id)
+    if (playlist.userId !== user.id) {
+      await Hit.create({ playlistId: playlist.id })
+    }
     const moviesDb = await Movie.query().where('playlistId', playlist.id)
     const movies = []
     for (const movie of moviesDb) {

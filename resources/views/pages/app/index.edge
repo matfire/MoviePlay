@@ -2,6 +2,11 @@
 @if(playlists.length === 0)
 no playlists found
 @end
+<div class="w-full flex items-center">
+    <div>
+        {{hits}}
+    </div>
+</div>
 <div>
     @each(playlist in playlists)
     <a href="{{route('app_playlists.show', {id: playlist.id})}}">{{playlist.name}}</a>
