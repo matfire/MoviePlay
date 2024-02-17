@@ -15,7 +15,11 @@ export default class AppsController {
         playlists.map((e) => e.id)
       )
       .count('*', 'total')
-    return view.render('pages/app/index', { playlists, hits: hits[0].$extras.total ?? 0 })
+    return view.render('pages/app/index', {
+      playlists,
+      hits: hits[0].$extras.total ?? 0,
+      publicPlaylists,
+    })
   }
   async create({ view }: HttpContext) {
     return view.render('pages/app/playlist/create')
