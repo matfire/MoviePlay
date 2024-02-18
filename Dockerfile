@@ -18,8 +18,6 @@ WORKDIR /app
 
 COPY --from=builder /app/build .
 
-#COPY --from=builder /app/.env.prod .env
-
 RUN pnpm install --prod
 
 EXPOSE 3333
