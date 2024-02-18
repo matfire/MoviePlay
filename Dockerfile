@@ -23,5 +23,7 @@ COPY --from=builder /app/build .
 RUN pnpm install --prod
 
 EXPOSE 3333
+ENV PORT=3333
+ENV HOST=0.0.0.0
 
-CMD [ "node", "bin/serverjs" ]
+CMD [ "node", "bin/server.js" ]
