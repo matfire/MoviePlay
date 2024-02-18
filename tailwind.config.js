@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: "class",
+  darkMode: 'class',
+  content: ['resources/views/**/*.{edge|html|js|jsx|ts|tsx,vue}'],
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui")],
-};
+  plugins: [require('@tailwindcss/container-queries')],
+}

@@ -1,0 +1,10 @@
+{
+  "edit": {
+    "order_change_label": "Select order for this movie"
+  },
+  "show": {
+    "add_movie": "add movie",
+    "edit": "edit",
+    "no_movies": "no movies found"
+  }
+}

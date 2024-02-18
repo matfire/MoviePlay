@@ -1,0 +1,14 @@
+@layout()
+
+<form method="post" action="{{route('app_playlists.store')}}">
+    {{ csrfField() }}
+    <label for="title">Title</label>
+    <input type="text" name="title">
+    <label for="description">Description</label>
+    <textarea name="description"></textarea>
+    <label for="isPublic">Is it public</label>
+    <input type="checkbox" name="isPublic">
+    <button type="submit">Create</button>
+</form>
+
+@end

@@ -1,0 +1,35 @@
+@layout()
+
+@unless(!movies)
+<div class="relative w-full h-screen">
+    <div class="absolute top-0 left-0 bg-black/50 w-full h-full">
+        <div class="w-full h-full bg-cover bg-no-repeat absolute -z-10"
+            style="background-image: url('https://image.tmdb.org/t/p/original/{{movies[0].backdrop_path}}');">
+        </div>
+        <div class="w-full h-full flex flex-col items-center justify-center text-white">
+            <h1 class="font-bold text-3xl">{{playlist.name}}</h1>
+            <p>{{playlist.description}}</p>
+        </div>
+    </div>
+</div>
+@end
+
+
+@if (!movies)
+<p>
+    {{t('playlists.show.no_movies')}}
+</p>
+@endif
+
+@if(auth.isAuthenticated && playlist.userId === auth.user.id)
+<a href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">{{t('playlists.show.add_movie')}}</a>
+<a href="{{route('app_playlists.edit', {id: playlist.id})}}">{{t('playlists.show.edit')}}</a>
+@endif
+<div class="@container w-full space-y-4">
+    @each(movie in movies)
+    @component('components/movie_card', { movie })
+    @end
+    @end
+</div>
+
+@end

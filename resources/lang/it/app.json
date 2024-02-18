@@ -1,0 +1,9 @@
+{
+  "own_playlists": "le tue playlists",
+  "public_playlists": "le playlists pubbliche",
+  "create_playlist": "crea une playlist",
+  "no_public_playlists": "non ci sono playlist pubbliche",
+  "stats": {
+    "hits": "visualizzazioni"
+  }
+}
