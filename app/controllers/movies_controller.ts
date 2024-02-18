@@ -4,7 +4,7 @@ import env from '#start/env'
 export default class MoviesController {
   async search({ request }: HttpContext) {
     const data = await request.all()
-    const res = await new API(env.get('TMDB_API_KEY')).movies.search({ query: data.query })
+    await new API(env.get('TMDB_API_KEY')).movies.search({ query: data.query })
     return { message: 'ok' }
   }
 }

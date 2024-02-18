@@ -25,10 +25,17 @@ export default class PlaylistsController {
     })
     return response.redirect().toRoute('app_playlists.show', { id: p.id })
   }
-  async show({ view, params, auth, i18n }: HttpContext) {
+  async show({ view, params, auth, i18n, response, session }: HttpContext) {
     const user = await auth.authenticate()
     const lang = i18n.locale
     const playlist = await Playlist.findOrFail(params.id)
+    if (!auth.isAuthenticated && !playlist.isPublic) {
+      session.flash('notification', {
+        message: i18n.t('error.unauthorized_playlist'),
+        type: 'error',
+      })
+      return response.redirect().back()
+    }
     if (playlist.userId !== user.id) {
       await Hit.create({ playlistId: playlist.id })
     }

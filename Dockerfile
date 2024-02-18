@@ -1,27 +1,27 @@
 FROM node:21-alpine as builder
 
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
 WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install
 
 COPY . .
-
-RUN node ace build  --ignore-ts-errors
+RUN pnpm install
+RUN pnpm build  --ignore-ts-errors
 
 FROM node:21-alpine
-
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 WORKDIR /app
-
-RUN apk add --no-cache tini
 
 COPY --from=builder /app/build .
 
 #COPY --from=builder /app/.env.prod .env
 
-RUN npm i --omit=dev
+RUN pnpm install --prod
 
 EXPOSE 3333
 
-ENTRYPOINT [ "/sbin/tini", "--", "node", "bin/server.js" ]
+CMD [ "node", "bin/serverjs" ]

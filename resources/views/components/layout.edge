@@ -20,6 +20,11 @@
         </div>
     </header>
     <main class="flex-1">
+        @if(flashMessages.has('notification'))
+        <div class="notification {{ flashMessages.get('notification').type }}">
+            {{ flashMessages.get('notification').message }}
+        </div>
+        @end
         {{{await $slots.main()}}}
     </main>
     <footer class="mt-4">
