@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: app
+    runtime: docker
+    rootDir: .
+    healthCheckPath: /
+    disk:
+      name: sqlite-data
+      mountPath: /app/tmp
+    envVars:
+      - key: TZ
+        value: UTC
+      - key: PORT
+        value: 3333
+      - key: HOST
+        value: 0.0.0.0
+      - key: APP_KEY
+        sync: false
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: LOG_LEVEL
+        sync: false
+      - key: TMDB_API_KEY
+        sync: false
+      - key: REDIS_ENDPOINT
+        sync: false
+      - key: REDIS_USERNAME
+        sync: false
+      - key: REDIS_PASSWORD
+        sync: false
+      - key: REDIS_PORT
+        sync: false
+      - key: GITHUB_CLIENT_ID
+        sync: false
+      - key: GITHUB_CLIENT_SECRET
+        sync: false
+      - key: GITHUB_REDIRECT_URI
+        sync: false
