@@ -1,6 +1,6 @@
 @layout()
-<div class="flex w-full h-full max-h-full">
-    <div class="w-full lg:w-1/2 flex flex-col justify-center max-h-full h-full px-4 items-center">
+<div class="grid grid-cols-1 lg:grid-cols-2">
+    <div class="w-full flex flex-col justify-center h-full px-4 items-center">
         <h1 class="capitalize">{{t('auth.login')}}</h1>
         <div>
             <a class="inline-flex items-center capitalize px-4 py-2 border border-black dark:border-white rounded-lg"
@@ -9,8 +9,8 @@
                 {{t("auth.github_login")}}</a>
         </div>
     </div>
-    <div class="hidden w-full lg:block lg:w-1/2">
-        <img src="{{asset('resources/img/theatre-front.jpg')}}" class="hidden lg:block h-full" />
+    <div class="hidden lg:block max-h-full">
+        <img src="{{asset('resources/img/theatre-front.jpg')}}" class="" />
     </div>
 </div>
 @end
