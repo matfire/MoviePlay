@@ -1,5 +1,5 @@
 @layout()
-<div class="grid grid-cols-1 lg:grid-cols-2">
+<div class="grid grid-cols-1 lg:grid-cols-2 h-full max-h-full">
     <div class="w-full flex flex-col justify-center h-full px-4 items-center">
         <h1 class="capitalize">{{t('auth.login')}}</h1>
         <div>
@@ -9,8 +9,7 @@
                 {{t("auth.github_login")}}</a>
         </div>
     </div>
-    <div class="hidden lg:block max-h-full">
-        <img src="{{asset('resources/img/theatre-front.jpg')}}" class="" />
+    <div class="hidden lg:block bg-cover bg-center" style="background-image: url('{{asset('resources/img/theatre-front.jpg')}}')">
     </div>
 </div>
 @end
