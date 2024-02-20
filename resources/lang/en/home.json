@@ -3,5 +3,6 @@
   "features": {
     "create": "create your playlists",
     "share": "share with others"
-  }
+  },
+  "tagline": "create and share your playlists with others"
 }

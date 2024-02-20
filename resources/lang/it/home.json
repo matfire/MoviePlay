@@ -3,5 +3,7 @@
   "features": {
     "create": "crea le tue proprie playlist",
     "share": "condividile con gli altri membri"
-  }
+  },
+  "tagline": "crea e condividi le tue playlist"
+
 }

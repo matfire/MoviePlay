@@ -6,5 +6,15 @@
     "add_movie": "add movie",
     "edit": "edit",
     "no_movies": "no movies found"
+  },
+  "movie_search": {
+    "search_movie": "search movie",
+    "add_movie": "add movie"
+  },
+  "form": {
+    "title": "title",
+    "description": "description",
+    "isPublic": "is this playlist public?",
+    "submit": "create"
   }
 }
