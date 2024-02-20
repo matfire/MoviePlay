@@ -6,5 +6,15 @@
     "add_movie": "ajouter un film",
     "edit": "modifier la playlist",
     "no_movies": "aucun film trouvé"
+  },
+  "movie_search": {
+    "search_movie": "rechercher un film",
+    "add_movie": "ajouter ce film"
+  },
+  "form": {
+    "title": "titre",
+    "description": "description",
+    "isPublic": "est-ce que cette playlist est publique ?",
+    "submit": "envoyer"
   }
 }

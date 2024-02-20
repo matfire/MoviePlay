@@ -2,13 +2,13 @@
 
 <form method="post" action="{{route('app_playlists.store')}}">
     {{ csrfField() }}
-    <label for="title">Title</label>
+    <label for="title">{{t('playlists.form.title')}}</label>
     <input type="text" name="title">
-    <label for="description">Description</label>
+    <label for="description">{{t('playlists.form.description')}}</label>
     <textarea name="description"></textarea>
-    <label for="isPublic">Is it public</label>
+    <label for="isPublic">{{t('playlists.form.isPublic')}}</label>
     <input type="checkbox" name="isPublic">
-    <button type="submit">Create</button>
+    <button class="btn" type="submit">{{t('playlists.form.submit')}}</button>
 </form>
 
 @end
