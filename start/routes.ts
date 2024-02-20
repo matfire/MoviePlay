@@ -9,7 +9,6 @@
 
 const AuthController = () => import('#controllers/auth_controller')
 const AppsController = () => import('#controllers/apps_controller')
-const MoviesController = () => import('#controllers/movies_controller')
 const PlaylistsController = () => import('#controllers/playlists_controller')
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
@@ -32,10 +31,6 @@ router
   .get('/auth/google/callback', [AuthController, 'handleGoogleCallback'])
   .use(middleware.guest())
 router.get('/app', [AppsController, 'index']).as('app').use(middleware.auth())
-router
-  .get('/app/movies/search', [MoviesController, 'search'])
-  .as('app_movies.search')
-  .use(middleware.auth())
 router
   .resource('/app/playlists', PlaylistsController)
   .as('app_playlists')

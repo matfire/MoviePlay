@@ -1,9 +1,7 @@
 import Playlist from '#models/playlist'
-import env from '#start/env'
 import type { HttpContext } from '@adonisjs/core/http'
 import Movie from '#models/movie'
 import MovieService from '#services/movie_service'
-import API from '@matfire/the_movie_wrapper'
 import Hit from '#models/hit'
 
 export default class PlaylistsController {
@@ -58,7 +56,7 @@ export default class PlaylistsController {
     const data = request.all()
     let movies = null
     if (data.query) {
-      const res = await new API(env.get('TMDB_API_KEY')).movies.search({ query: data.query })
+      const res = await MovieService.searchMovies(data.query)
       movies = res.results
     }
     return view.render('pages/app/playlist/add_movie', { playlist, movies, query: data.query })
