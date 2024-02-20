@@ -7,6 +7,12 @@ export default class AuthController {
   async login({ view }: HttpContext) {
     return view.render('pages/login')
   }
+
+  async logout({ auth, response }: HttpContext) {
+    await auth.use('web').logout()
+    response.redirect('/')
+  }
+
   async redirectToGithub({ ally }: HttpContext) {
     await ally.use('github').redirect()
   }

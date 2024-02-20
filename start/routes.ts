@@ -16,6 +16,7 @@ import { middleware } from '#start/kernel'
 
 router.on('/').render('pages/home')
 router.get('/login', [AuthController, 'login']).as('login').use(middleware.guest())
+router.get('/logout', [AuthController, 'logout']).as('logout').use(middleware.auth())
 router
   .get('/auth/github/redirect', [AuthController, 'redirectToGithub'])
   .as('login.github_redirect')
