@@ -10,5 +10,11 @@
   "movie_search": {
     "search_movie": "cerca un film",
     "add_movie": "aggiungi questo film"
+  },
+  "form": {
+    "title": "titolo",
+    "description": "descizione",
+    "isPublic": "questa playlist è pubblica?",
+    "submit": "salva"
   }
 }
