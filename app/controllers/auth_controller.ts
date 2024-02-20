@@ -10,7 +10,12 @@ export default class AuthController {
   async redirectToGithub({ ally }: HttpContext) {
     await ally.use('github').redirect()
   }
-  async handleCallback({ ally, response, auth }: HttpContext) {
+
+  async redirectToGoogle({ ally }: HttpContext) {
+    await ally.use('google').redirect()
+  }
+
+  async handleGithubCallback({ ally, response, auth }: HttpContext) {
     const githubUser = await ally.use('github').user()
     const user = await User.firstOrCreate(
       { githubId: githubUser.id },
@@ -18,6 +23,17 @@ export default class AuthController {
     )
     await auth.use('web').login(user)
     // do something with the user
+    response.redirect('/app')
+  }
+  async handleGoogleCallback({ ally, response, auth }: HttpContext) {
+    const googleUser = await ally.use('google').user()
+/*     const user = await User.firstOrCreate(
+      { googleId: googleUser.id },
+      { email: googleUser.email, fullName: googleUser.name }
+    )
+    await auth.use('web').login(user)
+    // do something with the user */
+    console.log(googleUser)
     response.redirect('/app')
   }
 }
