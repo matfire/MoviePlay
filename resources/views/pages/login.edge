@@ -11,6 +11,13 @@
                         {{t("auth.github_login")}}
                     </span>
                 </a>
+                <a class="inline-flex items-center capitalize px-4 py-2 hover:rounded-none hover:scale-105 transition hover:shadow-md hover:border-transparent border border-black dark:border-white rounded-lg"
+                    href="{{route('login.google_redirect')}}">
+                    {{svg('mdi:google')}}
+                    <span class="ml-4">
+                        {{t("auth.google_login")}}
+                    </span>
+                </a>
             </div>
         </div>
     </div>
