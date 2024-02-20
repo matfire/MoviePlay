@@ -14,7 +14,7 @@ no playlists found
     <a href="{{route('app_playlists.show', {id: playlist.id})}}">{{playlist.name}}</a>
     @end
 </div>
-<a href="{{route('app_playlists.create')}}">{{t('app.create_playlist')}}</a>
+<a class="btn" href="{{route('app_playlists.create')}}">{{t('app.create_playlist')}}</a>
 <div>
     <h3>{{t('app.public_playlists')}}</h3>
     @if(publicPlaylists.length === 0)

@@ -24,8 +24,8 @@
 @endif
 
 @if(auth.isAuthenticated && playlist.userId === auth.user.id)
-<a href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">{{t('playlists.show.add_movie')}}</a>
-<a href="{{route('app_playlists.edit', {id: playlist.id})}}">{{t('playlists.show.edit')}}</a>
+<a class="btn" href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">{{t('playlists.show.add_movie')}}</a>
+<a class="btn" href="{{route('app_playlists.edit', {id: playlist.id})}}">{{t('playlists.show.edit')}}</a>
 @endif
 <div class="@container w-full space-y-4">
     @each(movie in movies)
