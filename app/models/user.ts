@@ -20,7 +20,10 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare email: string
 
   @column()
-  declare githubId: string
+  declare githubId: string | null
+
+  @column()
+  declare googleId: string | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
