@@ -58,7 +58,7 @@ export default class PlaylistsController {
     const data = request.all()
     let movies = null
     if (data.query) {
-      const res = await MovieService.searchMovies(data.query)
+      const res = await new API(env.get('TMDB_API_KEY')).movies.search({ query: data.query })
       movies = res.results
     }
     return view.render('pages/app/playlist/add_movie', { playlist, movies, query: data.query })
