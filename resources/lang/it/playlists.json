@@ -6,5 +6,9 @@
     "add_movie": "aggiungi un film",
     "edit": "modifica la playlist",
     "no_movies": "nessun film trovato"
+  },
+  "movie_search": {
+    "search_movie": "cerca un film",
+    "add_movie": "aggiungi questo film"
   }
 }
