@@ -49,14 +49,14 @@ export default class PlaylistsController {
     })
   }
 
-  async showAddMovie({ view, auth, request, params }: HttpContext) {
+  async showAddMovie({ view, auth, request, params, i18n }: HttpContext) {
     await auth.authenticate()
     //TODO check if user is playlist author
     const playlist = await Playlist.find(params.playlistId)
     const data = request.all()
     let movies = null
     if (data.query) {
-      const res = await MovieService.searchMovies(data.query)
+      const res = await MovieService.searchMovies(data.query, i18n.locale)
       movies = res.results
     }
     return view.render('pages/app/playlist/add_movie', { playlist, movies, query: data.query })
