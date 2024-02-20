@@ -21,7 +21,7 @@ export default class AuthController {
     await ally.use('google').redirect()
   }
 
-  async handleGithubCallback({ ally, response, auth }: HttpContext) {
+  async handleGithubCallback({ ally, response, auth, session }: HttpContext) {
     const githubUser = await ally.use('github').user()
     const user = await User.query()
       .where('githubId', githubUser.id)
@@ -39,9 +39,10 @@ export default class AuthController {
       await user.save()
       await auth.use('web').login(user)
     }
+    session.put('theme', 'light')
     response.redirect('/app')
   }
-  async handleGoogleCallback({ ally, response, auth }: HttpContext) {
+  async handleGoogleCallback({ ally, response, auth, session }: HttpContext) {
     const googleUser = await ally.use('google').user()
     const user = await User.query()
       .where('googleId', googleUser.id)
@@ -59,6 +60,7 @@ export default class AuthController {
       await user.save()
       await auth.use('web').login(user)
     }
+    session.put('theme', 'light')
     response.redirect('/app')
   }
 }
