@@ -20,7 +20,16 @@ router
   .get('/auth/github/redirect', [AuthController, 'redirectToGithub'])
   .as('login.github_redirect')
   .use(middleware.guest())
-router.get('/auth/github/callback', [AuthController, 'handleCallback']).use(middleware.guest())
+router
+  .get('/auth/github/callback', [AuthController, 'handleGithubCallback'])
+  .use(middleware.guest())
+router
+  .get('/auth/google/redirect', [AuthController, 'redirectToGoogle'])
+  .as('login.google_redirect')
+  .use(middleware.guest())
+router
+  .get('/auth/google/callback', [AuthController, 'handleGoogleCallback'])
+  .use(middleware.guest())
 router.get('/app', [AppsController, 'index']).as('app').use(middleware.auth())
 router
   .get('/app/movies/search', [MoviesController, 'search'])
