@@ -16,13 +16,13 @@
             <a href="{{auth.isAuthenticated ? '/app' : '/'}}">Movieplay</a>
             <div>
                 <a href="{{route('app')}}">playlists</a>
-                 @if(auth.isAuthenticated) 
-                 <a href="{{route('logout')}}">{{t('auth.logout')}}</a>
-                 @end
+                @if(auth.isAuthenticated)
+                <a href="{{route('logout')}}">{{t('auth.logout')}}</a>
+                @end
             </div>
         </div>
     </header>
-    <main class="flex-1">
+    <main class="flex-1 {{container ? 'container mx-auto' : ''}}">
         @if(flashMessages.has('notification'))
         <div class="notification {{ flashMessages.get('notification').type }}">
             {{ flashMessages.get('notification').message }}
