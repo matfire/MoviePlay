@@ -12,6 +12,9 @@
             <p class="font-semibold">
                 {{movie.vote_average.toFixed(1)}}/10
             </p>
+            @if(overview)
+            {{movie.overview}}
+            @end
         </div>
     </div>
 </div>
