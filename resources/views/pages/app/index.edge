@@ -12,9 +12,11 @@
     @if(playlists.length === 0)
     no playlists found
     @end
-    @each(playlist in playlists)
-    <a href="{{route('app_playlists.show', {id: playlist.id})}}">{{playlist.name}}</a>
-    @end
+    <div class="flex flex-wrap gap-4">
+        @each(playlist in playlists)
+        <a class="btn" href="{{route('app_playlists.show', {id: playlist.id})}}">{{playlist.name}}</a>
+        @end
+    </div>
 </div>
 <a class="btn" href="{{route('app_playlists.create')}}">{{t('app.create_playlist')}}</a>
 <div>
@@ -22,8 +24,10 @@
     @if(publicPlaylists.length === 0)
     <p>{{t('app.no_public_playlists')}}</p>
     @end
-    @each(playlist in publicPlaylists)
-    <a href="{{route('app_playlists.show', {id: playlist.id})}}">{{playlist.name}}</a>
-    @end
+    <div class="flex flex-wrap gap-4">
+        @each(playlist in publicPlaylists)
+        <a href="{{route('app_playlists.show', {id: playlist.id})}}">{{playlist.name}}</a>
+        @end
+    </div>
 </div>
 @end
