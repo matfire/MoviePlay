@@ -30,7 +30,7 @@
     <a class="btn" href="{{route('app_playlists.edit', {id: playlist.id})}}">{{t('playlists.show.edit')}}</a>
 </div>
 @endif
-<div class="@container w-full space-y-4">
+<div class="flex gap-4 overflow-x-auto p-0 md:p-6">
     @each(movie in movies)
     @component('components/movie_card', { movie })
     @end
