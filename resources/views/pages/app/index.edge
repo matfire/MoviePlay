@@ -8,7 +8,7 @@
     </div>
 </div>
 <div>
-    <h3>{{t('app.own_playlists')}}</h3>
+    <h3 class="capitalize">{{t('app.own_playlists')}}</h3>
     @if(playlists.length === 0)
     no playlists found
     @end
@@ -18,9 +18,9 @@
         @end
     </div>
 </div>
-<a class="btn" href="{{route('app_playlists.create')}}">{{t('app.create_playlist')}}</a>
-<div>
-    <h3>{{t('app.public_playlists')}}</h3>
+<a class="btn mt-4" href="{{route('app_playlists.create')}}">{{t('app.create_playlist')}}</a>
+<div class="mt-4">
+    <h3 class="capitalize">{{t('app.public_playlists')}}</h3>
     @if(publicPlaylists.length === 0)
     <p>{{t('app.no_public_playlists')}}</p>
     @end
