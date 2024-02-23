@@ -24,10 +24,13 @@
 @endif
 
 @if(auth.isAuthenticated && playlist.userId === auth.user.id)
-<a href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">{{t('playlists.show.add_movie')}}</a>
-<a href="{{route('app_playlists.edit', {id: playlist.id})}}">{{t('playlists.show.edit')}}</a>
+<div class="my-4">
+    <a class="btn"
+        href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">{{t('playlists.show.add_movie')}}</a>
+    <a class="btn" href="{{route('app_playlists.edit', {id: playlist.id})}}">{{t('playlists.show.edit')}}</a>
+</div>
 @endif
-<div class="@container w-full space-y-4">
+<div class="flex gap-4 overflow-x-auto p-0 md:p-6 scrollbar scrollbar-thumb-black dark:scrollbar-thumb-white scrollbar-track-white dark:scrollbar-track-black">
     @each(movie in movies)
     @component('components/movie_card', { movie })
     @end
