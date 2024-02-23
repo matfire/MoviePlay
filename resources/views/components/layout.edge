@@ -24,8 +24,9 @@
     </header>
     <main class="flex-1 {{container ? 'container mx-auto' : ''}}">
         @if(flashMessages.has('notification'))
-        <div class="notification {{ flashMessages.get('notification').type }}">
-            {{ flashMessages.get('notification').message }}
+        <div>
+            @alert({type: flashMessages.get('notification').type, message: flashMessages.get('notification').message})
+            @end
         </div>
         @end
         {{{await $slots.main()}}}

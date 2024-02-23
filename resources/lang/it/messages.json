@@ -1,0 +1,6 @@
+{
+  "success": {
+    "movie_add_playlist": "film aggiunto alla playlist",
+    "playlist_create": "playlist creata"
+  }
+}
