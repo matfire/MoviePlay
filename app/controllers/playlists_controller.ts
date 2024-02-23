@@ -62,7 +62,7 @@ export default class PlaylistsController {
     return view.render('pages/app/playlist/add_movie', { playlist, movies, query: data.query })
   }
 
-  async storeAddMovie({ auth, request, response, params }: HttpContext) {
+  async storeAddMovie({ auth, request, response, params, session, i18n }: HttpContext) {
     const data = request.all()
     await auth.authenticate()
     //TODO check if user is playlist author
@@ -72,6 +72,10 @@ export default class PlaylistsController {
       tmdbId: data.tmdbId,
       playlistId: playlist.id,
       order,
+    })
+    session.flash('notification', {
+      type: 'success',
+      message: i18n.t('messages.success.movie_add_playlist'),
     })
     return response
       .redirect()
