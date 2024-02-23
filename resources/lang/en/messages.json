@@ -1,5 +1,6 @@
 {
-    "success": {
-        "movie_add_playlist": "movie added to playlist"
-    }
+  "success": {
+    "movie_add_playlist": "movie added to playlist",
+    "playlist_create": "playlist created successfully"
+  }
 }
