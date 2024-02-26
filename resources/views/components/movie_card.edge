@@ -1,20 +1,22 @@
-<div class="flex flex-col min-w-96 h-full w-96 group md:hover:scale-105 transition-transform duration-[250ms]">
-    <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" class="w-full h-auto" />
-    <div
+<a href="{{route('app_movies.show', {id:movie.id})}}">
+    <div class="flex flex-col min-w-96 h-full w-96 group md:hover:scale-105 transition-transform duration-[250ms]">
+        <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" class="w-full h-auto" />
+        <div
         class="flex mt-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition md:-translate-y-10 group-hover:translate-y-0 duration-500 flex-col items-center">
-        <div class="flex flex-col items-center text-center">
-            <h3 class="font-bold text-xl">{{movie.title}}</h3>
-            @if(movie.genres)
-            <p class="">
-                {{movie.genres.map((e) => e.name).join(', ')}}
-            </p>
-            @end
-            <p class="font-semibold">
-                {{movie.vote_average.toFixed(1)}}/10
-            </p>
-            @if(overview)
-            {{movie.overview}}
-            @end
+            <div class="flex flex-col items-center text-center">
+                <h3 class="font-bold text-xl">{{movie.title}}</h3>
+                @if(movie.genres)
+                <p class="">
+                    {{movie.genres.map((e) => e.name).join(', ')}}
+                </p>
+                @end
+                <p class="font-semibold">
+                    {{movie.vote_average.toFixed(1)}}/10
+                </p>
+                @if(overview)
+                {{movie.overview}}
+                @end
+            </div>
         </div>
     </div>
-</div>
+</a>
