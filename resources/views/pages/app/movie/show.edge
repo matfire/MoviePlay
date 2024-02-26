@@ -1,14 +1,13 @@
 @layout({container:true})
     <div class="flex flex-col md:flex-row flex-nowrap">
         <div class="w-full md:w-1/2 flex items-center">
-            <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}}" alt="movie poster" class="w-96 h-auto" />
+            <img style="{{transitionName(`movie-${movie.id}`)}}" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}}" alt="movie poster" class="w-96 h-auto" />
         </div>
         <div class="flex-col">
             <h1>{{movie.title}}</h1>
             <p>{{movie.tagline}}</p>
             <p>{{new Date(movie.release_date).getFullYear()}} | {{movie.runtime}}</p>
-            <p>                    {{movie.genres.map((e) => e.name).join(', ')}}
-            </p>
+            <p>{{movie.genres.map((e) => e.name).join(', ')}}</p>
         </div>
     </div>
 @end
