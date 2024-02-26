@@ -67,6 +67,7 @@
     "@iconify-json/mdi": "^1.1.64",
     "@matfire/the_movie_wrapper": "^1.0.2",
     "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.7",
     "@vinejs/vine": "^1.7.1",
     "alpinejs": "^3.13.5",
     "bentocache": "1.0.0-beta.7",

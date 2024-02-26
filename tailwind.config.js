@@ -5,5 +5,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/container-queries'), require('tailwind-scrollbar')],
+  plugins: [require('@tailwindcss/container-queries'), require('tailwind-scrollbar'), require('@tailwindcss/forms')],
 }
