@@ -1,18 +1,35 @@
 @layout({container:true})
 
-    {{inspect(movie)}}
     <div class="flex flex-col md:flex-row flex-nowrap">
         <div class="w-full md:w-1/2 flex items-center">
             <img style="{{transitionName(`movie-${movie.id}`)}}" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}}" alt="movie poster" class="w-96 h-auto" />
         </div>
         <div class="flex-col w-full">
-            <div class="flex justify-between items-center">
-                <h1>{{movie.title}}</h1>
+            <div class="flex space-x-4 items-center">
+                <h1 class="font-bold text-xl">{{movie.title}}</h1>
                 <p class="flex items-center">{{svg('openmoji:star', {class:'w-8 h-8'})}} {{movie.vote_average.toFixed(1)}}/10 </p>
             </div>
             <p>{{movie.tagline}}</p>
             <p>{{new Date(movie.release_date).getFullYear()}} | {{duration(movie.runtime)}}</p>
-            <p>{{movie.genres.map((e) => e.name).join(', ')}}</p>
+            <div x-data="{currentTab:1}">
+                <ul>
+                    <li @click="currentTab = 1" >Overview</li>
+                    <li @click="currentTab = 2" >Media</li>
+                    <li @click="currentTab = 3">Recommandations</li>
+                </ul>
+                <div>
+                    <div x-show="currentTab === 1">
+                        <p>{{movie.genres.map((e) => e.name).join(', ')}}</p>
+                    </div>
+                    <div x-show="currentTab === 2">
+                        <p>media here</p>
+                    </div>
+                    <div x-show="currentTab === 3">
+                        <p>recommendations here
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @end
