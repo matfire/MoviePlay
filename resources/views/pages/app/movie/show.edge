@@ -6,29 +6,22 @@
         </div>
         <div class="flex-col w-full">
             <div class="flex space-x-4 items-center">
-                <h1 class="font-bold text-xl">{{movie.title}}</h1>
+                <h1 class="font-bold text-xl">{{movie.title}} <span class="font-normal">({{movie.original_title}})</span></h1>
                 <p class="flex items-center">{{svg('openmoji:star', {class:'w-8 h-8'})}} {{movie.vote_average.toFixed(1)}}/10 </p>
             </div>
             <p>{{movie.tagline}}</p>
             <p>{{new Date(movie.release_date).getFullYear()}} | {{duration(movie.runtime)}}</p>
-            <div x-data="{currentTab:1}">
+            <p>{{movie.genres.map((e) => e.name).join(', ')}}</p>
+            <p>
+                {{movie.overview}}
+            </p>
+            <div>
+                <p>{{t('movie.playlists')}}</p>
                 <ul>
-                    <li @click="currentTab = 1" >Overview</li>
-                    <li @click="currentTab = 2" >Media</li>
-                    <li @click="currentTab = 3">Recommandations</li>
-                </ul>
-                <div>
-                    <div x-show="currentTab === 1">
-                        <p>{{movie.genres.map((e) => e.name).join(', ')}}</p>
-                    </div>
-                    <div x-show="currentTab === 2">
-                        <p>media here</p>
-                    </div>
-                    <div x-show="currentTab === 3">
-                        <p>recommendations here
-                        </p>
-                    </div>
-                </div>
+                    @each(playlist in playlists)
+                        <a class="btn" href="{{route('app_playlists.show', {id: playlist.id})}}" >{{playlist.name}}</a>
+                    @end
+                    </ul>
             </div>
         </div>
     </div>
