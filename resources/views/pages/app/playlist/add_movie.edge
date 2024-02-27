@@ -2,7 +2,11 @@
 <h1>Add Movie</h1>
 
 <form method="get" action="{{route('app_playlists.add_movie', {playlistId: playlist.id})}}">
-    <input type="search" name="query">
+    @formLabel({name:"query", value:t('playlists.movie_search.search_movie')})
+    @end
+    @formInput({name:"query", type:"search", value:query}) 
+        
+    @end
     <button class="btn" type="submit">{{t('playlists.movie_search.search_movie')}}</button>
 </form>
 

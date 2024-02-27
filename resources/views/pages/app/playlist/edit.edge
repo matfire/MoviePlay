@@ -1,8 +1,17 @@
 @layout({container:true})
 <form method="post" action="{{route('app_playlists.update', {id: playlist.id})}}?_method=PUT">
     {{ csrfField() }}
-    <input name="name" value="{{playlist.name}}">
-    <input name="description" value="{{playlist.description}}">
+
+    @formLabel({name:"name", value: t('playlists.form.title')}) 
+        
+    @end
+    @formInput({name: 'name', value: playlist.name}) 
+        
+    @end
+    @formLabel({name:"description", value: t('playlists.form.description')})
+    @end
+    @formInput({name: 'description', value: playlist.description})
+    @end
     <input name="isPublic" type="checkbox" value="{{playlist.isPublic}}">
     <button class="btn" type="submit">{{t('common.buttons.save')}}</button>
     <div class="flex flex-col space-y-6 mt-4">
@@ -11,8 +20,10 @@
             @component('components/movie_card', { movie })
             @end
             <div>
-                <label for="movie_order_{{movie.id}}">{{t('playlists.edit.order_change_label')}}</label>
-                <input type="number" value="{{movie.order}}" name="movie_order:{{movie.id}}">
+                @formLabel({name:`movie_order_${movie.id}`, value: t('playlists.edit.order_change_label')}) 
+                @end
+                @formInput({type: 'number', value: movie.order, name: `movie_order:${movie.id}`}) 
+                @end
             </div>
         </div>
         @end

@@ -36,7 +36,7 @@
     </main>
     <footer class="mt-4">
         &copy; 2024 MoviePlay
-        <form action="/theme/{{session.get('theme') && session.get('theme') === 'light' ? 'dark' : 'light'}}">
+        <form data-turbo="false" action="/theme/{{session.get('theme') && session.get('theme') === 'light' ? 'dark' : 'light'}}">
             <button type="submit">Toggle Theme</button>
         </form>
         @if($slots.footer)
