@@ -13,6 +13,7 @@
   },
   "form": {
     "title": "titolo",
+    "title_placeholder": "titolo della playlist",
     "description": "descizione",
     "isPublic": "questa playlist è pubblica?",
     "submit": "salva"

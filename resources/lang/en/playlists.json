@@ -13,6 +13,7 @@
   },
   "form": {
     "title": "title",
+    "title_placeholder": "name your playlist",
     "description": "description",
     "isPublic": "is this playlist public?",
     "submit": "create"
