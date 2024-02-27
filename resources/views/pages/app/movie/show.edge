@@ -74,7 +74,26 @@
                     @end
                 </div>
             </div>
+            @if(movie.images.posters.length > 0)
+            <div>
+                <h3>{{t('movie.posters')}}</h3>
+                <div class="flex overflow-x-auto p-0 md:p-6 gap-4">
+                    @each(poster in movie.images.posters)
+                        <img src="https://image.tmdb.org/t/p/w500/{{poster.file_path}}" alt="poster for {{movie.title}}" class="w-64 h-auto" />
+                    @end
+                </div>
+            </div>
+            @end
+            @if(movie.images.backdrops.length > 0)                 
+                <div>
+                    <h3>{{t('movie.backdrops')}}</h3>
+                    <div class="flex overflow-x-auto p-0 md:p-6 gap-4">
+                        @each(backdrop in movie.images.backdrops)
+                            <img src="https://image.tmdb.org/t/p/w500/{{backdrop.file_path}}" alt="backdrop for {{movie.title}}" class="w-64 h-auto" />
+                        @end
+                    </div>
+                </div>
+            @end
         </div>
     </div>
-    {{inspect(movie)}}
 @end
