@@ -1,27 +1,46 @@
 @layout({container:true})
 
     <div class="flex flex-col md:flex-row flex-nowrap">
-        <div class="w-full md:w-1/2 flex items-center">
-            <img style="{{transitionName(`movie-${movie.id}`)}}" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}}" alt="movie poster" class="w-96 h-auto" />
+        <div class="w-full md:w-1/2 flex items-start">
+            <img style="{{transitionName(`movie-${movie.id}`)}}" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}}" alt="movie poster" class="w-96 h-auto sticky top-0" />
         </div>
-        <div class="flex-col w-full">
+        <div class="flex-col w-full space-y-4">
             <div class="flex space-x-4 items-center">
                 <h1 class="font-bold text-xl">{{movie.title}} <span class="font-normal">({{movie.original_title}})</span></h1>
                 <p class="flex items-center">{{svg('openmoji:star', {class:'w-8 h-8'})}} {{movie.vote_average.toFixed(1)}}/10 </p>
             </div>
-            <p>{{movie.tagline}}</p>
-            <p>{{new Date(movie.release_date).getFullYear()}} | {{duration(movie.runtime)}}</p>
-            <p>{{movie.genres.map((e) => e.name).join(', ')}}</p>
-            <p>
-                {{movie.overview}}
-            </p>
             <div>
-                <p>{{t('movie.playlists')}}</p>
+                <p>{{movie.tagline}}</p>
+                <p>{{new Date(movie.release_date).getFullYear()}} | {{duration(movie.runtime)}}</p>
+                <p>{{movie.genres.map((e) => e.name).join(', ')}}</p>
+            </div>
+            <div>
+                <p>
+                    {{movie.overview}}
+                </p>
+            </div>
+            <div>
+                <h3>{{t('movie.playlists')}}</h3>
                 <ul>
-                    @each(playlist in playlists)
+                    @each(playlist in playlists.filter((e) => e.known_for_department === 'Acting'))
+                    <li>
                         <a class="btn" href="{{route('app_playlists.show', {id: playlist.id})}}" >{{playlist.name}}</a>
+                    </li>
                     @end
                     </ul>
+            </div>
+            <div>
+                <h3>{{t('movie.cast')}}</h3>
+                <div class="flex overflow-x-auto">
+                    @each(cast in movie.credits.cast)
+                    <div class="min-w-64 text-center w-auto flex flex-col items-center">
+                        <img src="https://image.tmdb.org/t/p/w500/{{cast.profile_path}}" alt="profile pic for {{cast.name}}" class="w-24 object-cover h-24 rounded-full" />
+                        <p>{{cast.name}}</p>
+                        <p>as</p>
+                        <p>{{cast.character}}</p>
+                    </div>
+                    @end
+                </div>
             </div>
         </div>
     </div>
