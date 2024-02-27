@@ -1,10 +1,10 @@
 @layout({container:true})
 
-    <div class="flex flex-col md:flex-row flex-nowrap">
-        <div class="w-full md:w-1/2 flex items-start">
-            <img style="{{transitionName(`movie-${movie.id}`)}}" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}}" alt="movie poster" class="w-96 h-auto sticky top-0" />
+    <div class="flex flex-col md:flex-row w-full">
+        <div class="w-full md:w-1/3">
+            <img style="{{transitionName(`movie-${movie.id}`)}}" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}}" alt="movie poster" class="w-96 sticky top-0" />
         </div>
-        <div class="flex-col w-full space-y-4">
+        <div class="flex-col w-full md:w-2/3 space-y-4">
             <div class="flex space-x-4 items-center">
                 <h1 class="font-bold text-xl">{{movie.title}} <span class="font-normal">({{movie.original_title}})</span></h1>
                 <p class="flex items-center">{{svg('openmoji:star', {class:'w-8 h-8'})}} {{movie.vote_average.toFixed(1)}}/10 </p>
@@ -22,12 +22,23 @@
             <div>
                 <h3>{{t('movie.playlists')}}</h3>
                 <ul>
-                    @each(playlist in playlists.filter((e) => e.known_for_department === 'Acting'))
+                    @each(playlist in playlists)
                     <li>
                         <a class="btn" href="{{route('app_playlists.show', {id: playlist.id})}}" >{{playlist.name}}</a>
                     </li>
                     @end
-                    </ul>
+                </ul>
+            </div>
+            <div>
+                <h3>{{t('movie.production_company')}}</h3>
+                <div class="flex overflow-x-auto">
+                    @each(production_company in movie.production_companies)
+                        <div class="min-w-64 text-center w-auto flex flex-col items-center justify-center">
+                            <img src="https://image.tmdb.org/t/p/w500/{{production_company.logo_path}}" alt="logo for {{production_company.name}}" class="w-24  h-auto" />
+                            <p>{{production_company.name}}</p>
+                        </div>
+                    @end
+                </div>
             </div>
             <div>
                 <h3>{{t('movie.cast')}}</h3>
@@ -38,6 +49,18 @@
                         <p>{{cast.name}}</p>
                         <p>as</p>
                         <p>{{cast.character}}</p>
+                    </div>
+                    @end
+                </div>
+            </div>
+            <div>
+                <h3>{{t('movie.crew')}}</h3>
+                <div class="flex overflow-x-auto">
+                    @each(crew in movie.credits.crew)
+                    <div class="min-w-64 text-center w-auto flex flex-col items-center">
+                        <img src="https://image.tmdb.org/t/p/w500/{{crew.profile_path}}" alt="profile pic for {{crew.name}}" class="w-24 object-cover h-24 rounded-full" />
+                        <p>{{crew.name}}</p>
+                        <p>{{crew.job}}</p>
                     </div>
                     @end
                 </div>
