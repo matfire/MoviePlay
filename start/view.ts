@@ -3,8 +3,10 @@ import { edgeViewTransitions } from '@matfire/edge-view-transitions'
 import { edgeIconify, addCollection } from 'edge-iconify'
 import { icons as heroIcons } from '@iconify-json/heroicons'
 import { icons as mdiIcons } from '@iconify-json/mdi'
+import { icons as openMojiIcons } from '@iconify-json/openmoji'
 addCollection(heroIcons)
 addCollection(mdiIcons)
+addCollection(openMojiIcons)
 
 /**
  * Register a plugin
