@@ -3,7 +3,12 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class MoviesController {
   async show({ view, params, i18n }: HttpContext) {
-    const movie = await MovieService.getMovie(params.id, i18n.locale)
+    const movie = await MovieService.getMovie(params.id, i18n.locale, [
+      'credits',
+      'videos',
+      'images',
+      'similar',
+    ])
     return view.render('pages/app/movie/show', {
       movie,
     })

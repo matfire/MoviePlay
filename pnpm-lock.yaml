@@ -32,27 +32,18 @@ dependencies:
   '@adonisjs/vite':
     specifier: ^2.0.2
     version: 2.0.2(@adonisjs/core@6.2.3)(@adonisjs/shield@8.1.1)(edge.js@6.0.1)(vite@5.1.1)
-  '@hotwired/turbo':
-    specifier: ^8.0.3
-    version: 8.0.3
   '@iconify-json/heroicons':
     specifier: ^1.1.20
     version: 1.1.20
   '@iconify-json/mdi':
     specifier: ^1.1.64
     version: 1.1.64
-  '@matfire/edge-view-transitions':
-    specifier: ^0.0.3
-    version: 0.0.3
   '@matfire/the_movie_wrapper':
     specifier: ^1.0.2
     version: 1.0.2
   '@tailwindcss/container-queries':
     specifier: ^0.1.1
     version: 0.1.1(tailwindcss@3.4.1)
-  '@tailwindcss/forms':
-    specifier: ^0.5.7
-    version: 0.5.7(tailwindcss@3.4.1)
   '@vinejs/vine':
     specifier: ^1.7.1
     version: 1.7.1
@@ -80,9 +71,6 @@ dependencies:
   reflect-metadata:
     specifier: ^0.2.1
     version: 0.2.1
-  unpoly:
-    specifier: ^3.7.3
-    version: 3.7.3
 
 devDependencies:
   '@adonisjs/assembler':
@@ -971,11 +959,6 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@hotwired/turbo@8.0.3:
-    resolution: {integrity: sha512-qLgp7d6JaegKjMToTJahosrFxV3odfSbiekispQ3soOzE5jnU+iEMWlRvYRe/jvy5Q+JWoywtf9j3RD4ikVjIg==}
-    engines: {node: '>= 14'}
-    dev: false
-
   /@humanwhocodes/config-array@0.11.14:
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
@@ -988,6 +971,11 @@ packages:
     dev: true
 
   /@humanwhocodes/module-importer@1.0.1:
+  /@hotwired/turbo@8.0.3:
+    resolution: {integrity: sha512-qLgp7d6JaegKjMToTJahosrFxV3odfSbiekispQ3soOzE5jnU+iEMWlRvYRe/jvy5Q+JWoywtf9j3RD4ikVjIg==}
+    engines: {node: '>= 14'}
+    dev: false
+
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
     engines: {node: '>=12.22'}
     dev: true
@@ -1159,10 +1147,6 @@ packages:
   /@lukeed/ms@2.0.2:
     resolution: {integrity: sha512-9I2Zn6+NJLfaGoz9jN3lpwDgAYvfGeNYdbAIjJOqzs4Tpc+VU3Jqq4IofSUBKajiDS8k9fZIg18/z13mpk1bsA==}
     engines: {node: '>=8'}
-
-  /@matfire/edge-view-transitions@0.0.3:
-    resolution: {integrity: sha512-zTUPFAznOTBtmLfmHs6MGyAsZrSgADUmcjGiIKvB4MF/j9vEkULVvWxvmPFZ0i+zcCoQlV8C+DTJHIIRHes7cg==}
-    dev: false
 
   /@matfire/the_movie_wrapper@1.0.2:
     resolution: {integrity: sha512-VWgT4Dbgf7/tL/Y4XC1BmR69zlgzQnTk3zxAUYZ48WzrotvDNg8ybbVH+i6OKaEhDjfqPoVPEkIV0KWYwCfanw==}
@@ -1570,6 +1554,15 @@ packages:
 
   /@tsconfig/node16@1.0.4:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
+  /@tailwindcss/forms@0.5.7(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-QE7X69iQI+ZXwldE+rzasvbJiyV/ju1FGHH0Qn2W3FKbuYtqp8LKcy6iSw79fVUT5/Vvf+0XgLCeYVG+UV6hOw==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
+    dependencies:
+      mini-svg-data-uri: 1.4.4
+      tailwindcss: 3.4.1(ts-node@10.9.2)
+    dev: false
+
 
   /@types/bytes@3.1.4:
     resolution: {integrity: sha512-A0uYgOj3zNc4hNjHc5lYUfJQ/HVyBXiUMKdXd7ysclaE6k9oJdavQzODHuwjpUu2/boCP8afjQYi8z/GtvNCWA==}
@@ -5399,10 +5392,6 @@ packages:
   /uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
-  /unpoly@3.7.3:
-    resolution: {integrity: sha512-nuzAZpyxHXUTq4teI+E2hNsfKK9fpHlTBbtj4/tIRturdh9ZeiFYfiHQ7jdFK0HwI2YblKl8nLjVsChUqwK0QQ==}
-    dev: false
-
       punycode: 2.3.1
     dev: true
 
