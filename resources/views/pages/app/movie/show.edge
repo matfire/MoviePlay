@@ -23,7 +23,7 @@
                     </p>
                 </div>
                 <div>
-                    <h3>{{t('movie.playlists')}}</h3>
+                    <h3 class="capitalize">{{t('movie.playlists')}}</h3>
                     <ul>
                         @each(playlist in playlists)
                         <li>
@@ -33,7 +33,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h3>{{t('movie.production_companies')}}</h3>
+                    <h3 class="capitalize">{{t('movie.production_companies')}}</h3>
                     <div class="flex overflow-x-auto">
                         @each(production_company in movie.production_companies)
                             <div class="min-w-64 text-center w-auto flex flex-col items-center justify-center">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div>
-                    <h3>{{t('movie.cast')}}</h3>
+                    <h3 class="capitalize">{{t('movie.cast')}}</h3>
                     <div class="flex overflow-x-auto">
                         @each(cast in movie.credits.cast)
                         <div class="min-w-64 text-center w-auto flex flex-col items-center">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div>
-                    <h3>{{t('movie.crew')}}</h3>
+                    <h3 class="capitalize">{{t('movie.crew')}}</h3>
                     <div class="flex overflow-x-auto">
                         @each(crew in movie.credits.crew)
                         <div class="min-w-64 text-center w-auto flex flex-col items-center">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div>
-                    <h3>{{t('movie.similar')}}</h3>
+                    <h3 class="capitalize">{{t('movie.similar')}}</h3>
                     <div class="flex overflow-x-auto p-0 md:p-6 gap-4">
                         @each(similar in movie.similar.results)
                             @movieCard({movie:similar}) 
@@ -79,7 +79,7 @@
                 </div>
                 @if(movie.images.posters.length > 0)
                 <div>
-                    <h3>{{t('movie.posters')}}</h3>
+                    <h3 class="capitalize">{{t('movie.posters')}}</h3>
                     <div class="flex overflow-x-auto p-0 md:p-6 gap-4">
                         @each(poster in movie.images.posters)
                             <img @click="() => {modalOpen = true; imageSrc='https://image.tmdb.org/t/p/w500/{{poster.file_path}}'}" src="https://image.tmdb.org/t/p/w500/{{poster.file_path}}" alt="poster for {{movie.title}}" class="w-64 h-auto" />
@@ -89,7 +89,7 @@
                 @end
                 @if(movie.images.backdrops.length > 0)                 
                     <div>
-                        <h3>{{t('movie.backdrops')}}</h3>
+                        <h3 class="capitalize">{{t('movie.backdrops')}}</h3>
                         <div class="flex overflow-x-auto p-0 md:p-6 gap-4">
                             @each(backdrop in movie.images.backdrops)
                                 <img @click="() => {modalOpen = true; imageSrc='https://image.tmdb.org/t/p/w500/{{backdrop.file_path}}'}" src="https://image.tmdb.org/t/p/w500/{{backdrop.file_path}}" alt="backdrop for {{movie.title}}" class="w-64 h-auto" />
