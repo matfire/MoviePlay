@@ -1,9 +1,12 @@
+<!DOCTYPE html>
+
 <html class="{{session.get('theme') === 'dark' ? 'dark' : ''}}">
 
 <head>
     <title>MoviePlay</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="view-transition" content="same-origin" />
     @vite(['resources/js/app.js'])
     @if($slots.header)
     {{{await $slots.header()}}}
