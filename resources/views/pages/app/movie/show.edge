@@ -24,6 +24,9 @@
                 </div>
                 <div>
                     <h3 class="capitalize">{{t('movie.playlists')}}</h3>
+                    @if(playlists.length === 0)
+                        <p>{{t('movie.no_playlists')}}</p>
+                    @end
                     <ul>
                         @each(playlist in playlists)
                         <li>
