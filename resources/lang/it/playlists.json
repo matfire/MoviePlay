@@ -17,5 +17,8 @@
     "description": "descizione",
     "isPublic": "questa playlist è pubblica?",
     "submit": "salva"
+  },
+  "update": {
+    "success": "playlist aggiornata con successo"
   }
 }

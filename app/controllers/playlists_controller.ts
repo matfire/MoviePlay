@@ -45,7 +45,7 @@ export default class PlaylistsController {
     const movies = []
     for (const movie of moviesDb) {
       const data = await MovieService.getMovie(movie.tmdbId, lang)
-      movies.push(data)
+      movies.push({ ...data, order: movie.order })
     }
     return view.render('pages/app/playlist/show', {
       playlist,
@@ -100,7 +100,7 @@ export default class PlaylistsController {
     }
     return view.render('pages/app/playlist/edit', { playlist, movies })
   }
-  async update({ request, response, params, auth }: HttpContext) {
+  async update({ request, response, params, auth, session, i18n }: HttpContext) {
     await auth.authenticate()
     const playlist = await Playlist.findOrFail(params.id)
     const data = request.all()
@@ -125,6 +125,10 @@ export default class PlaylistsController {
       }
     }
     await playlist.save()
+    session.flash('notification', {
+      type: 'success',
+      message: i18n.t('playlists.update.success'),
+    })
     return response.redirect().toRoute('app_playlists.show', { id: params.id })
   }
   // destroy({ view }: HttpContext) {

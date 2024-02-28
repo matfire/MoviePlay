@@ -17,5 +17,8 @@
     "description": "description",
     "isPublic": "is this playlist public?",
     "submit": "create"
+  },
+  "update": {
+    "success": "playlist updated"
   }
 }
