@@ -31,7 +31,7 @@
 </div>
 @endif
 <div class="flex gap-4 overflow-x-auto p-0 md:p-6 scrollbar scrollbar-thumb-black dark:scrollbar-thumb-white scrollbar-track-white dark:scrollbar-track-black">
-    @each(movie in movies)
+    @each(movie in movies.sort((a, b) => a.order - b.order))
     @component('components/movie_card', { movie })
     @end
     @end

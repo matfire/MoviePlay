@@ -17,5 +17,8 @@
     "description": "description",
     "isPublic": "est-ce que cette playlist est publique ?",
     "submit": "envoyer"
+  },
+  "update": {
+    "success": "Playlist mise à jour avec succès"
   }
 }
