@@ -34,6 +34,10 @@ router
 router.get('/app', [AppsController, 'index']).as('app').use(middleware.auth())
 router.get('/app/movies/:id', [MoviesController, 'show']).as('app_movies.show')
 router
+  .delete('/app/movies', [MoviesController, 'remove'])
+  .as('app_movies.delete')
+  .use(middleware.auth())
+router
   .resource('/app/playlists', PlaylistsController)
   .as('app_playlists')
   .use(['create', 'store', 'destroy', 'update'], middleware.auth())
