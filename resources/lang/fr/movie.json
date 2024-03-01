@@ -1,10 +1,14 @@
 {
-    "playlists": "présent dans ces playlists",
-    "production_companies": "boites de production",
-    "cast": "acteurs",
-    "crew":"équipe",
-    "similar":"films similaires",
-    "posters":"affiches",
-    "backdrops":"fonds d'écran",
-    "no_playlists": "aucune playlist n'a été trouvée"
+  "playlists": "présent dans ces playlists",
+  "production_companies": "boites de production",
+  "cast": "acteurs",
+  "crew": "équipe",
+  "similar": "films similaires",
+  "posters": "affiches",
+  "backdrops": "fonds d'écran",
+  "no_playlists": "aucune playlist n'a été trouvée",
+  "delete": {
+    "error": "Une erreur est survenue lors de la suppression du film",
+    "success": "Le film a été supprimé avec succès"
+  }
 }
