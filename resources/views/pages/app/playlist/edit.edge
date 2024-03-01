@@ -1,12 +1,16 @@
 @layout({container:true})
-<form method="post" action="{{route('app_playlists.update', {id: playlist.id})}}?_method=PUT">
+
+<form id="movieDelete" method="post" x-data action="{{route('app_movies.delete')}}?_method=DELETE">
+    {{ csrfField() }}
+    <input type="hidden" name="playlistId" value="{{playlist.id}}">
+</form>
+
+<form id="playlistUpdate" method="post" action="{{route('app_playlists.update', {id: playlist.id})}}?_method=PUT">
     {{ csrfField() }}
 
-    @formLabel({name:"name", value: t('playlists.form.title')}) 
-        
+    @formLabel({name:"name", value: t('playlists.form.title')})
     @end
-    @formInput({name: 'name', value: playlist.name}) 
-        
+    @formInput({name: 'name', value: playlist.name})
     @end
     @formLabel({name:"description", value: t('playlists.form.description')})
     @end
@@ -14,20 +18,25 @@
     @end
     <input name="isPublic" type="checkbox" value="{{playlist.isPublic}}">
     <button class="btn" type="submit">{{t('common.buttons.save')}}</button>
-    <div class="flex flex-col space-y-6 mt-4">
-        @each(movie in movies)
-        <div class="flex">
-            @component('components/movie_card', { movie })
-            @end
-            <div>
-                @formLabel({name:`movie_order_${movie.id}`, value: t('playlists.edit.order_change_label')}) 
-                @end
-                @formInput({type: 'number', value: movie.order, name: `movie_order:${movie.id}`}) 
-                @end
-            </div>
-        </div>
-        @end
-    </div>
 </form>
+<div class="flex flex-col space-y-6 mt-4">
+    @each(movie in movies)
+    <div class="flex">
+        @component('components/movie_card', { movie })
+        @end
+        <div>
+            @formLabel({form:"playlistUpdate", name:`movie_order_${movie.id}`, value:
+            t('playlists.edit.order_change_label')})
+            @end
+            @formInput({form:"playlistUpdate", type: 'number', value: movie.order, name: `movie_order:${movie.id}`})
+            @end
+            <button form="movieDelete" name="movieId" value="{{movie.appId}}" type="submit">
+                {{svg('mdi:trash', {class: 'w-6 h-6, fill-current text-red-500'})}}
+                {{t('common.buttons.delete')}}
+            </button>
+        </div>
+    </div>
+    @end
+</div>
 
 @end
