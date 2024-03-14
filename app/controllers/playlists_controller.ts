@@ -96,7 +96,7 @@ export default class PlaylistsController {
     const movies = []
     for (const movie of moviesDb) {
       const data = await MovieService.getMovie(movie.tmdbId, i18n.locale)
-      movies.push({ ...data, order: movie.order })
+      movies.push({ ...data, order: movie.order, appId: movie.id })
     }
     return view.render('pages/app/playlist/edit', { playlist, movies })
   }

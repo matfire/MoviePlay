@@ -26,4 +26,20 @@ export default class MoviesController {
       playlists,
     })
   }
+  async remove({ auth, request, i18n, session, response }: HttpContext) {
+    //TODO check for user permissions
+    await auth.authenticate()
+    const { movieId, playlistId } = request.all()
+    const movie = await Movie.query()
+      .where('id', movieId)
+      .andWhere('playlistId', playlistId)
+      .first()
+    if (!movie) {
+      session.flash('notification', { type: 'error', message: i18n.t('movie.delete.error') })
+      return response.redirect().back()
+    }
+    await movie.delete()
+    session.flash('notification', { type: 'success', message: i18n.t('movie.delete.success') })
+    return response.redirect().back()
+  }
 }
