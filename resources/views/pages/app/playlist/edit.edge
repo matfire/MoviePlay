@@ -30,8 +30,8 @@
             @end
             @formInput({form:"playlistUpdate", type: 'number', value: movie.order, name: `movie_order:${movie.id}`})
             @end
-            <button form="movieDelete" name="movieId" value="{{movie.appId}}" type="submit">
-                {{svg('mdi:trash', {class: 'w-6 h-6, fill-current text-red-500'})}}
+            <button form="movieDelete" name="movieId" value="{{movie.appId}}" type="submit" class="inline-flex px-2 py-2 rounded-sm bg-red-500 text-white">
+                {{svg('mdi:trash', {class: 'w-6 h-6'})}}
                 {{t('common.buttons.delete')}}
             </button>
         </div>
