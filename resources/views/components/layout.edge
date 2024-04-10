@@ -13,7 +13,7 @@
     @endif
 </head>
 
-<body class="h-screen dark:bg-black dark:text-white p-0 m-0 flex flex-col ">
+<body class="h-screen dark:text-white p-0 m-0 flex flex-col bg-light dark:bg-dark">
     <header>
         <div class="flex justify-between items-center h-16 px-6">
             <a href="{{auth.isAuthenticated ? '/app' : '/'}}">
@@ -31,7 +31,7 @@
             </div>
         </div>
     </header>
-    <main class="flex-1 {{container ? 'container mx-auto' : ''}} bg-light dark:bg-dark">
+    <main class="flex-1 {{container ? 'container mx-auto' : ''}}">
         @if(flashMessages.has('notification'))
         <div>
             @alert({type: flashMessages.get('notification').type, message: flashMessages.get('notification').message})
