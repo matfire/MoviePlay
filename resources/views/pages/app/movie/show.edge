@@ -1,6 +1,6 @@
 @layout({container:true})
     <div x-data="{modalOpen: false, imageSrc: null}">
-        @modal() 
+        @modal()
             <img x-bind:src="imageSrc" alt="poster" class="w-full h-auto" />
         @end
         <div class="flex flex-col md:flex-row w-full">
@@ -9,7 +9,7 @@
             </div>
             <div class="flex-col w-full md:w-2/3 space-y-4">
                 <div class="flex space-x-4 items-center">
-                    <h1 class="font-bold text-xl">{{movie.title}} <span class="font-normal">({{movie.original_title}})</span></h1>
+                    <h1 class="font-bold text-3xl font-primary">{{movie.title}} <span class="font-normal">({{movie.original_title}})</span></h1>
                     <p class="flex items-center">{{svg('openmoji:star', {class:'w-8 h-8'})}} {{movie.vote_average.toFixed(1)}}/10 </p>
                 </div>
                 <div>
@@ -75,7 +75,7 @@
                     <h3 class="capitalize">{{t('movie.similar')}}</h3>
                     <div class="flex overflow-x-auto p-0 md:p-6 gap-4">
                         @each(similar in movie.similar.results)
-                            @movieCard({movie:similar}) 
+                            @movieCard({movie:similar})
                             @end
                         @end
                     </div>
@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 @end
-                @if(movie.images.backdrops.length > 0)                 
+                @if(movie.images.backdrops.length > 0)
                     <div>
                         <h3 class="capitalize">{{t('movie.backdrops')}}</h3>
                         <div class="flex overflow-x-auto p-0 md:p-6 gap-4">

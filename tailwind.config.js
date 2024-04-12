@@ -4,6 +4,10 @@ export default {
   content: ['resources/views/**/*.{edge|html|js|jsx|ts|tsx,vue}'],
   theme: {
     extend: {
+      fontFamily: {
+        "primary": ["YellowTail", "serif"],
+        "secondary": ["Space-Grotesk", "sans-serif"]
+      },
       backgroundColor: {
         "light": "#E0E0E0",
         "dark": "#1E1D1E"

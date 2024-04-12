@@ -7,3 +7,13 @@
     @apply inline-flex items-center capitalize px-4 py-2 hover:rounded-none hover:scale-105 transition hover:shadow-md hover:dark:border-transparent hover:border-transparent border border-black dark:border-white rounded-lg;
   }
 }
+
+@font-face {
+  font-family: "YellowTail";
+  src: url("/public/yellowtail.ttf");
+}
+
+@font-face {
+  font-family: "Space-Grotesk";
+  src: url("/public/spacegrotesk.ttf");
+}
