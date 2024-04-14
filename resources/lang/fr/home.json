@@ -2,7 +2,8 @@
   "get_started": "allons-y",
   "features": {
     "create": "créez vos propres playlists",
-    "share": "partagez-les avec d'autres membres"
+    "share": "partagez-les avec d'autres membres",
+    "discuss": "discutez-on avec les autres"
   },
   "tagline": "créez et partagez vos playlists"
 }

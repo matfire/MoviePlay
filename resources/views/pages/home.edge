@@ -1,25 +1,39 @@
 @layout()
+
+@slot("header")
+@vite(["resources/js/pages/home.js"])
+@end
+
 <div class="w-full h-screen flex flex-col justify-center items-center">
-    <img src="{{asset('resources/img/logo.svg')}}" />
+    <img id="logo" src="{{asset('resources/img/logo.svg')}}" />
     <p class="">{{t('home.tagline')}}</p>
     <a href="/app"
         class="dark:border-white border-black border px-4 py-2 rounded-lg mt-2 hover:scale-105 transition-transform capitalize">{{t('home.get_started')}}</a>
 </div>
-<div class="flex my-16 flex-col justify-center items-center ">
-    <h3 class="font-primary text-4xl">Features</h3>
-    <div class="flex justify-evenly w-full">
-        <div class="flex flex-col items-center">
-            @svg('heroicons:list-bullet', {class:"w-12 h-12"})
-            <p class="capitalize">{{t('home.features.create')}}</p>
-        </div>
-        <div class="flex flex-col items-center">
-            @svg('heroicons:share', {class:"w-12 h-12"})
-            <p class="capitalize">{{t('home.features.share')}}</p>
-        </div>
+<div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+  <div class="mx-auto max-w-lg text-center">
+    <h2 class="text-xl font-bold font-primary sm:text-6xl" >Features</h2>
+  </div>
+  <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <div class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary/10 hover:shadow-primary/10">
+      @svg('heroicons:list-bullet', {class:"w-12 h-12"})
+      <p class="capitalize">{{t('home.features.create')}}</p>
     </div>
+    <div class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary/10 hover:shadow-primary/10">
+      @svg('heroicons:share', {class:"w-12 h-12"})
+      <p class="capitalize">{{t('home.features.share')}}</p>
+    </div>
+    <div class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary/10 hover:shadow-primary/10">
+      @svg('mdi:discussion', {class:"w-12 h-12"})
+      <p class="capitalize">{{t('home.features.discuss')}}</p>
+    </div>
+  </div>
 </div>
-<div class="flex flex-col justify-center items-center">
-    <p>powered by</p>
-    <img class="w-96 h-auto" src="{{asset('resources/img/tmdb.svg')}}" />
+<div class="px-6 py-24 sm:py-32 lg:px-8">
+  <div class="mx-auto max-w-2xl text-center">
+    <h2 class="text-xl font-bold font-primary tracking-tight sm:text-6xl">Powered By</h2>
+    <div class="w-full mx-auto mt-4">
+    <img class="h-auto" src="{{asset('resources/img/tmdb.svg')}}" />
+    </div>
 </div>
 @end

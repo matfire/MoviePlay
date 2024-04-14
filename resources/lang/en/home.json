@@ -2,7 +2,8 @@
   "get_started": "get started",
   "features": {
     "create": "create your playlists",
-    "share": "share with others"
+    "share": "share with others",
+    "discuss": "let your voices be heard"
   },
   "tagline": "create and share your playlists with others"
 }

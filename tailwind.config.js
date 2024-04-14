@@ -8,6 +8,10 @@ export default {
         "primary": ["YellowTail", "serif"],
         "secondary": ["Space-Grotesk", "sans-serif"]
       },
+      colors: {
+        "primary": "#7A52FF",
+        "secondary": "#FCEF57"
+      },
       backgroundColor: {
         "dark": "#1E1D1E"
       }
