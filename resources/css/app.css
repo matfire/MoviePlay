@@ -4,7 +4,7 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center capitalize px-4 py-2 hover:rounded-none hover:scale-105 transition hover:shadow-md hover:dark:border-transparent hover:border-transparent border border-black dark:border-white rounded-lg;
+    @apply border-primary border shadow-md transition px-4 py-2 rounded-lg mt-2 hover:border-secondary/30 hover:shadow-secondary/30;
   }
 }
 
