@@ -8,14 +8,11 @@
 <form id="playlistUpdate" method="post" action="{{route('app_playlists.update', {id: playlist.id})}}?_method=PUT">
     {{ csrfField() }}
 
-    @formLabel({name:"name", value: t('playlists.form.title')})
-    @end
-    @formInput({name: 'name', value: playlist.name})
-    @end
-    @formLabel({name:"description", value: t('playlists.form.description')})
-    @end
-    @formInput({name: 'description', value: playlist.description})
-    @end
+    @!formLabel({name:"name", value: t('playlists.form.title')})
+    @!formInput({name: 'name', value: playlist.name})
+    @!formLabel({name:"description", value: t('playlists.form.description')})
+    @!formInput({name: 'description', value: playlist.description})
+    @!formLabel({name:"isPublic", value: t('playlists.form.is_public')})
     <input name="isPublic" type="checkbox" value="{{playlist.isPublic}}">
     <button class="btn" type="submit">{{t('common.buttons.save')}}</button>
 </form>

@@ -9,7 +9,6 @@ export default {
         "secondary": ["Space-Grotesk", "sans-serif"]
       },
       backgroundColor: {
-        "light": "#E0E0E0",
         "dark": "#1E1D1E"
       }
     },
