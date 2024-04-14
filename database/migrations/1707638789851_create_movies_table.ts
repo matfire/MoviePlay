@@ -5,7 +5,7 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.integer('playlist_id').unsigned().notNullable().references('playlists.id')
+      table.integer('playlist_id').unsigned().notNullable().references('playlists.id').onDelete('CASCADE')
       table.integer('order').unsigned().notNullable()
     })
   }

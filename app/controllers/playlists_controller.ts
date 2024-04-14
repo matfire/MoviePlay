@@ -13,7 +13,7 @@ export default class PlaylistsController {
   }
 
   async store({ request, response, auth, session, i18n }: HttpContext) {
-    const data = await request.all()
+    const data = request.all()
     const user = await auth.authenticate()
     const p = await Playlist.create({
       userId: user.id,
@@ -30,7 +30,7 @@ export default class PlaylistsController {
   async show({ view, params, auth, i18n, response, session }: HttpContext) {
     const user = await auth.authenticate()
     const lang = i18n.locale
-    const playlist = await Playlist.findOrFail(params.id)
+    const playlist = await Playlist.query().where('id', params.id).preload('movies').firstOrFail()
     if (!auth.isAuthenticated && !playlist.isPublic) {
       session.flash('notification', {
         message: i18n.t('error.unauthorized_playlist'),
@@ -41,7 +41,8 @@ export default class PlaylistsController {
     if (playlist.userId !== user.id) {
       await Hit.create({ playlistId: playlist.id })
     }
-    const moviesDb = await Movie.query().where('playlistId', playlist.id)
+    console.log(playlist)
+    const moviesDb = playlist.movies
     const movies = []
     for (const movie of moviesDb) {
       const data = await MovieService.getMovie(movie.tmdbId, lang)

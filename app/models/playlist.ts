@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
-import type { ManyToMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasMany, manyToMany } from '@adonisjs/lucid/orm'
+import type { HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
 import Movie from '#models/movie'
 
 export default class Playlist extends BaseModel {
@@ -19,8 +19,8 @@ export default class Playlist extends BaseModel {
   @column()
   declare isPublic: boolean
 
-  @manyToMany(() => Movie)
-  declare movies: ManyToMany<typeof Movie>
+  @hasMany(() => Movie)
+  declare movies: HasMany<typeof Movie>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
