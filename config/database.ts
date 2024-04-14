@@ -1,13 +1,15 @@
+import env from '#start/env'
 import app from '@adonisjs/core/services/app'
 import { defineConfig } from '@adonisjs/lucid'
+import libsql from "@libsql/knex-libsql"
 
 const dbConfig = defineConfig({
   connection: 'sqlite',
   connections: {
     sqlite: {
-      client: 'better-sqlite3',
+      client: libsql,
       connection: {
-        filename: app.tmpPath('db.sqlite3'),
+        filename: `${env.get("DATABASE_URL")}?authToken=${env.get("DATABASE_TOKEN")}`,
       },
       useNullAsDefault: true,
       migrations: {

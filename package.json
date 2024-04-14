@@ -67,6 +67,7 @@
     "@iconify-json/heroicons": "^1.1.20",
     "@iconify-json/mdi": "^1.1.64",
     "@iconify-json/openmoji": "^1.1.48",
+    "@libsql/knex-libsql": "^0.1.0",
     "@matfire/edge-view-transitions": "^0.0.3",
     "@matfire/the_movie_wrapper": "^1.0.3",
     "@tailwindcss/container-queries": "^0.1.1",
