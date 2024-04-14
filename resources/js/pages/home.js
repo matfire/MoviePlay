@@ -12,6 +12,6 @@ inView("section", (element) => {
   timeline([
     [element.target, { opacity: 100 }, { delay: 0.3 }],
     [element.target.querySelectorAll(".feature"), { opacity: 100, x: [-100, 0] }, { delay: stagger(0.3), duration: 0.8 }],
-    [element.target.querySelector("#tmdb-logo"), { opacity: 100, y: [-100, 0] }, { delay: 0.3, duration: 0.5 }]
+    [element.target.querySelector("#tmdb-logo"), { opacity: 100, y: [-100, 0] }, { duration: 0.5 }]
   ])
 })
