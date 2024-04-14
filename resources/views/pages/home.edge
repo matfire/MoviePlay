@@ -4,13 +4,13 @@
 @vite(["resources/js/pages/home.js"])
 @end
 
-<div class="w-full h-screen flex flex-col justify-center items-center">
+<section class="w-full h-screen flex flex-col justify-center items-center">
     <img id="logo" src="{{asset('resources/img/logo.svg')}}" />
     <p class="">{{t('home.tagline')}}</p>
     <a href="/app"
         class="dark:border-white border-black border px-4 py-2 rounded-lg mt-2 hover:scale-105 transition-transform capitalize">{{t('home.get_started')}}</a>
-</div>
-<div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+</section>
+<section class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
   <div class="mx-auto max-w-lg text-center">
     <h2 class="text-xl font-bold font-primary sm:text-6xl" >Features</h2>
   </div>
@@ -28,12 +28,12 @@
       <p class="capitalize">{{t('home.features.discuss')}}</p>
     </div>
   </div>
-</div>
-<div class="px-6 py-24 sm:py-32 lg:px-8">
+</section>
+<section class="px-6 py-24 sm:py-32 lg:px-8">
   <div class="mx-auto max-w-2xl text-center">
     <h2 class="text-xl font-bold font-primary tracking-tight sm:text-6xl">Powered By</h2>
     <div class="w-full mx-auto mt-4">
     <img class="h-auto" src="{{asset('resources/img/tmdb.svg')}}" />
     </div>
-</div>
+</section>
 @end
