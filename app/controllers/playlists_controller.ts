@@ -41,7 +41,6 @@ export default class PlaylistsController {
     if (playlist.userId !== user.id) {
       await Hit.create({ playlistId: playlist.id })
     }
-    console.log(playlist)
     const moviesDb = playlist.movies
     const movies = []
     for (const movie of moviesDb) {
