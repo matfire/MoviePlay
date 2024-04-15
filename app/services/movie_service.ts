@@ -5,7 +5,7 @@ import env from '#start/env'
 
 export default class MovieService {
   static async getMovie(id: number, lang = 'en', extras: AppendToResponseMovie[] = []) {
-    const tmdbClient = await new API(env.get('TMDB_API_KEY'))
+    const tmdbClient = new API(env.get('TMDB_API_KEY'))
     tmdbClient.setLanguage(lang as Language)
     const data = await bento.getOrSet(`${id}:${lang}${extras.length > 0 ? ':extras' : ''}`, () =>
       tmdbClient.movies.getMovie(id, extras)
@@ -13,7 +13,7 @@ export default class MovieService {
     return data
   }
   static async searchMovies(query: string, lang = 'en') {
-    const tmdbClient = await new API(env.get('TMDB_API_KEY'))
+    const tmdbClient = new API(env.get('TMDB_API_KEY'))
     tmdbClient.setLanguage(lang as Language)
     const data = await bento.getOrSet(`${query}:${lang}`, () => tmdbClient.movies.search({ query }))
     return data
