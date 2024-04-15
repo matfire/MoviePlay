@@ -1,6 +1,6 @@
 @layout({container:true})
 <div class="w-full flex items-center">
-    <div class="w-48 h-48 shadow-lg flex flex-col justify-center items-center">
+    <div class="w-48 h-48 shadow-lg border border-primary/30 flex flex-col justify-center items-center">
         <span class="font-bold text-2xl" >
             {{hits}}
         </span>
@@ -39,7 +39,7 @@
         @end
     </div>
 </div>
-<a class="btn mt-4" href="{{route('app_playlists.create')}}">{{t('app.create_playlist')}}</a>
+<a class="btn btn-padding mt-4" href="{{route('app_playlists.create')}}">{{t('app.create_playlist')}}</a>
 <div class="mt-4">
     <h3 class="capitalize">{{t('app.public_playlists')}}</h3>
     @if(publicPlaylists.length === 0)
