@@ -4,7 +4,10 @@
 
 @layer components {
   .btn {
-    @apply border-primary border shadow-md transition px-4 py-2 rounded-lg mt-2 hover:border-secondary/30 hover:shadow-secondary/30;
+    @apply border-primary/30 border shadow-md transition-all rounded-lg mt-2 hover:border-secondary/30 hover:shadow-secondary/30;
+  }
+  .btn-padding {
+    @apply px-4 py-2;
   }
 }
 
