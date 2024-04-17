@@ -63,7 +63,6 @@
     "@adonisjs/shield": "^8.1.1",
     "@adonisjs/static": "^1.1.1",
     "@adonisjs/vite": "^2.0.2",
-    "@hotwired/turbo": "^8.0.3",
     "@iconify-json/heroicons": "^1.1.20",
     "@iconify-json/mdi": "^1.1.64",
     "@iconify-json/openmoji": "^1.1.48",
@@ -79,7 +78,8 @@
     "edge.js": "^6.0.1",
     "luxon": "^3.4.4",
     "motion": "^10.17.0",
-    "reflect-metadata": "^0.2.1"
+    "reflect-metadata": "^0.2.1",
+    "unpoly": "^3.7.3"
   },
   "eslintConfig": {
     "extends": "@adonisjs/eslint-config/app"

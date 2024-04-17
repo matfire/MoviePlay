@@ -16,13 +16,13 @@
 <body class="h-screen text-white p-0 m-0 flex flex-col bg-dark font-secondary">
     <header>
         <div class="flex justify-between items-center h-16 px-6">
-            <a href="{{auth.isAuthenticated ? '/app' : '/'}}">
+            <a up-follow href="{{auth.isAuthenticated ? '/app' : '/'}}">
               <img src="{{asset('resources/img/logo-mini-dark.svg')}}" class="h-16 w-16 p-2" />
             </a>
             <div>
-                <a href="{{route('app')}}">playlists</a>
+                <a up-follow href="{{route('app')}}">playlists</a>
                 @if(auth.isAuthenticated)
-                <a href="{{route('logout')}}">{{t('auth.logout')}}</a>
+                <a up-follow="main, header" href="{{route('logout')}}">{{t('auth.logout')}}</a>
                 @end
             </div>
         </div>
