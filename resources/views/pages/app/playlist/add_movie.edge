@@ -1,11 +1,12 @@
 @layout()
+<div class="w-full h-full">
 <h1>Add Movie</h1>
 
-<form method="get" action="{{route('app_playlists.add_movie', {playlistId: playlist.id})}}">
+<form up-submit method="get" action="{{route('app_playlists.add_movie', {playlistId: playlist.id})}}">
     @formLabel({name:"query", value:t('playlists.movie_search.search_movie')})
     @end
-    @formInput({name:"query", type:"search", value:query}) 
-        
+    @formInput({name:"query", type:"search", value:query})
+
     @end
     <button class="btn" type="submit">{{t('playlists.movie_search.search_movie')}}</button>
 </form>
@@ -14,7 +15,7 @@
     @each(movie in movies)
     @component('components/movie_card', { movie })
     @end
-    <form method="post" action="{{route('app_playlists.store_add_movie', {playlistId: playlist.id})}}">
+    <form up-submit method="post" action="{{route('app_playlists.store_add_movie', {playlistId: playlist.id})}}">
         {{ csrfField() }}
         <input type="hidden" name="query" value="{{query}}">
         <input name="tmdbId" type="hidden" value="{{movie.id}}">
@@ -22,5 +23,5 @@
     </form>
     @end
 </div>
-
+</div>
 @end

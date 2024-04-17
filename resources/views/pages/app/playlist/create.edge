@@ -1,10 +1,10 @@
 @layout()
 
-<form method="post" action="{{route('app_playlists.store')}}">
+<form up-follow method="post" action="{{route('app_playlists.store')}}">
     {{ csrfField() }}
-    @formLabel({name:"title", value: t('playlists.form.title')})         
+    @formLabel({name:"title", value: t('playlists.form.title')})
     @end
-    @formInput({name:"title", placeholder: t('playlists.form.title_placeholder')}) 
+    @formInput({name:"title", placeholder: t('playlists.form.title_placeholder')})
     @end
     @formLabel({name:"description", value: t('playlists.form.description')})
     @end
