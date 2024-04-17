@@ -1,5 +1,6 @@
 @layout()
 
+
 @unless(!movies)
 <div class="relative w-full h-screen">
     <div class="absolute top-0 left-0 bg-black/50 w-full h-full">
@@ -25,9 +26,9 @@
 
 @if(auth.isAuthenticated && playlist.userId === auth.user.id)
 <div class="my-4">
-    <a class="btn btn-padding"
+    <a up-follow up-layer="new" class="btn btn-padding"
         href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">{{t('playlists.show.add_movie')}}</a>
-    <a class="btn btn-padding" href="{{route('app_playlists.edit', {id: playlist.id})}}">{{t('playlists.show.edit')}}</a>
+    <a up-follow class="btn btn-padding" href="{{route('app_playlists.edit', {id: playlist.id})}}">{{t('playlists.show.edit')}}</a>
 </div>
 @endif
 <div class="flex gap-4 overflow-x-auto p-0 md:p-6 scrollbar scrollbar-thumb-black dark:scrollbar-thumb-white scrollbar-track-white dark:scrollbar-track-black">

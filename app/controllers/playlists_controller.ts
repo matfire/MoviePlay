@@ -82,6 +82,7 @@ export default class PlaylistsController {
       message: i18n.t('messages.success.movie_add_playlist'),
     })
     return response
+      .append("X-Up-Events", "[{ 'type': 'movie_added' }]")
       .redirect()
       .toRoute(
         'app_playlists.add_movie',

@@ -16,10 +16,10 @@
         @each(playlist in playlists)
         <div class="w-full h-full">
           @if(playlist.movies.length == 0)
-            <a class="btn" href="{{route('app_playlists.show', {id: playlist.id})}}">{{playlist.name}}</a>
+            <a up-follow class="btn" href="{{route('app_playlists.show', {id: playlist.id})}}">{{playlist.name}}</a>
           @else
             @let(movie = moviesData.get(playlist.movies[0].tmdbId))
-            <a href="{{route('app_playlists.show', {id: playlist.id})}}" class="btn inline-block relative group">
+            <a up-follow href="{{route('app_playlists.show', {id: playlist.id})}}" class="btn inline-block relative group">
               <div class="absolute flex flex-col justify-center items-center inset-0 bg-black/70 opacity-0 group-hover:opacity-100 z-10 transition-opacity">
                 <h2 class="font-primary text-3xl sm:text-4xl">{{playlist.name}}</h2>
                 @if(playlist.description)
@@ -39,7 +39,7 @@
         @end
     </div>
 </div>
-<a class="btn btn-padding mt-4" href="{{route('app_playlists.create')}}">{{t('app.create_playlist')}}</a>
+<a up-follow class="btn btn-padding mt-4" href="{{route('app_playlists.create')}}">{{t('app.create_playlist')}}</a>
 <div class="mt-4">
     <h3 class="capitalize">{{t('app.public_playlists')}}</h3>
     @if(publicPlaylists.length === 0)
@@ -47,7 +47,7 @@
     @end
     <div class="flex flex-wrap gap-4">
         @each(playlist in publicPlaylists)
-        <a href="{{route('app_playlists.show', {id: playlist.id})}}">{{playlist.name}}</a>
+        <a up-follow href="{{route('app_playlists.show', {id: playlist.id})}}">{{playlist.name}}</a>
         @end
     </div>
 </div>
