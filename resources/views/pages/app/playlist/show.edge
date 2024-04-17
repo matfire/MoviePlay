@@ -1,5 +1,8 @@
 @layout()
 
+@slot("header")
+@vite(["resources/js/pages/app/playlist/show.js"])
+@end
 
 @unless(!movies)
 <div class="relative w-full h-screen">
@@ -26,7 +29,7 @@
 
 @if(auth.isAuthenticated && playlist.userId === auth.user.id)
 <div class="my-4">
-    <a up-follow up-layer="new" class="btn btn-padding"
+    <a up-follow up-layer="new" up-on-dismissed="up.reload()" class="btn btn-padding"
         href="{{route('app_playlists.add_movie', {playlistId:playlist.id})}}">{{t('playlists.show.add_movie')}}</a>
     <a up-follow class="btn btn-padding" href="{{route('app_playlists.edit', {id: playlist.id})}}">{{t('playlists.show.edit')}}</a>
 </div>
