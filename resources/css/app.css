@@ -20,3 +20,8 @@
   font-family: "Space-Grotesk";
   src: url("/public/spacegrotesk.ttf");
 }
+up-modal-box {
+    background-color:black;
+    @apply bg-dark;
+  }
+
