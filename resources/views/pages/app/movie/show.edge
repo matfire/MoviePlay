@@ -75,7 +75,7 @@
                     <h3 class="capitalize">{{t('movie.similar')}}</h3>
                     <div class="flex overflow-x-auto p-0 md:p-6 gap-4">
                         @each(similar in movie.similar.results)
-                          <div class="w-1/3">
+                          <div class="min-w-64">
                             @movieCard({movie:similar})
                             @end
                           </div>
