@@ -27,10 +27,10 @@
                     @if(playlists.length === 0)
                         <p>{{t('movie.no_playlists')}}</p>
                     @end
-                    <ul>
+                    <ul class="flex gap-4 mt-2">
                         @each(playlist in playlists)
                         <li>
-                            <a class="btn" href="{{route('app_playlists.show', {id: playlist.id})}}" >{{playlist.name}}</a>
+                            <a class="btn btn-padding" href="{{route('app_playlists.show', {id: playlist.id})}}" >{{playlist.name}}</a>
                         </li>
                         @end
                     </ul>
@@ -75,8 +75,10 @@
                     <h3 class="capitalize">{{t('movie.similar')}}</h3>
                     <div class="flex overflow-x-auto p-0 md:p-6 gap-4">
                         @each(similar in movie.similar.results)
+                          <div class="w-1/3">
                             @movieCard({movie:similar})
                             @end
+                          </div>
                         @end
                     </div>
                 </div>
